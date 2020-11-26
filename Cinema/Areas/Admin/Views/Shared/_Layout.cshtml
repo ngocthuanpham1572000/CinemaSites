@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    @await Html.PartialAsync("_HeadPartial.cshtml")
+    @RenderSection("css", required: false)
+    
+
+</head>
+<body>
+    <div class="container-scroller">
+        @await Html.PartialAsync("_NavbarPartial.cshtml")
+        <div class="container-fluid page-body-wrapper">
+            @await Html.PartialAsync("_SidebarPartial.cshtml")
+            <div class="main-panel">
+                @RenderBody()
+                @await Html.PartialAsync("_FooterPartial.cshtml")
+            </div>
+            </div>
+          
+        </div>
+   
+    @await Html.PartialAsync("_ScriptPartial.cshtml")
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

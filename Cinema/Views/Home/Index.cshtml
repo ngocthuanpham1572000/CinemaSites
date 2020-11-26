@@ -1,0 +1,117 @@
+﻿@await Html.PartialAsync("_BannerPartial.cshtml")
+<section class="movie-section padding-top padding-bottom">
+    <div class="container">
+        <div class="tab">
+            <div class="section-header-2">
+                <div class="left">
+                    <h3 class="title">Phim đang chiếu</h3>
+                    <p>Những bộ phim hay đang chờ bạn.</p>
+                </div>
+                <ul class="tab-menu">
+                    <li class="active">
+                        now showing
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="tab-area mb-30-none">
+                <div class="tab-item active">
+                    <div class="owl-carousel owl-theme tab-slider">
+                        @for (int i = 0; i < 9; i++)
+                        {
+                            <div class="item">
+                                <div class="movie-grid">
+                                    <div class="movie-thumb c-thumb">
+                                        <a asp-controller="Movie" asp-action="Movie_Detail">
+                                            <img src="~/template_user/assets/images/movie/movie01.jpg" alt="movie">
+                                        </a>
+                                    </div>
+                                    <div class="movie-content bg-one">
+                                        <h5 class="title m-0">
+                                            <a asp-controller="Movie" asp-action="Movie_Detail">alone</a>
+                                        </h5>
+                                        <ul class="movie-rating-percent">
+                                            <li>
+                                                <div class="thumb">
+                                                    <img src="~/template_user/assets/images/movie/tomato.png" alt="movie">
+                                                </div>
+                                                <span class="content">88%</span>
+                                            </li>
+                                            <li>
+                                                <div class="thumb">
+                                                    <img src="~/template_user/assets/images/movie/cake.png" alt="movie">
+                                                </div>
+                                                <span class="content">88%</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="movie-section padding-top padding-bottom">
+    <div class="container">
+        <div class="tab">
+            <div class="section-header-2">
+                <div class="left">
+                    <h4 class="title">Phim sắp chiếu</h4>
+                    <p>Phim bom tấn sắp đổ bộ </p>
+                </div>
+                <ul class="tab-menu">
+                    <li class="active">
+                        comming soon
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="tab-area mb-30-none">
+                <div class="tab-item active">
+                    <div class="owl-carousel owl-theme tab-slider">
+                        @for (int i = 0; i < 9; i++)
+                        {
+                            <div class="item">
+                                <div class="movie-grid">
+                                    <div class="movie-thumb c-thumb">
+                                        <a asp-controller="Movie" asp-action="Movie_Detail_CommingSoon">
+                                            <img src="~/template_user/assets/images/movie/movie01.jpg" alt="movie">
+                                        </a>
+                                    </div>
+                                    <div class="movie-content bg-one">
+                                        <h5 class="title m-0">
+                                            <a asp-controller="Movie" asp-action="Movie_Detail_CommingSoon">alone</a>
+                                        </h5>
+                                        <ul class="movie-rating-percent">
+                                            <li>
+                                                <div class="thumb">
+                                                    <img src="~/template_user/assets/images/movie/tomato.png" alt="movie">
+                                                </div>
+                                                <span class="content">88%</span>
+                                            </li>
+                                            <li>
+                                                <div class="thumb">
+                                                    <img src="~/template_user/assets/images/movie/cake.png" alt="movie">
+                                                </div>
+                                                <span class="content">88%</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
