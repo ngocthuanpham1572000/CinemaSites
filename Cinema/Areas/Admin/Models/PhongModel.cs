@@ -19,7 +19,7 @@ namespace Cinema.Areas.Admin.Models
         public int Rap { get; set; }
         [ForeignKey("Rap")]
         public virtual RapPhimModel MaRapPhim { get; set; }
-        public ICollection<HangModel> LstHang { get; set; }
+        public ICollection<HangGheModel> LstHangGhe { get; set; }
         public ICollection<SuatChieuModel> LstSuatChieu { get; set; }
 
     }
