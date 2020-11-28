@@ -12,5 +12,10 @@ namespace Cinema.Controllers
         {
             return View();
         }
+
+        public IActionResult Cinema_Detail()
+        {
+            return View();
+        }
     }
 }
