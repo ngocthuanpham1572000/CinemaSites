@@ -28,10 +28,12 @@ namespace Cinema.Areas.Admin.Models
 
         public string Trailer { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NgayPhatHanh { get; set; }
         [Required]
-        public int LoaiPhim { get; set; }
-        [ForeignKey("LoaiPhim")]
+        public int MaLoai { get; set; }
+        [ForeignKey("MaLoai")]
         public virtual LoaiPhimModel Loai { get; set; }
 
     }

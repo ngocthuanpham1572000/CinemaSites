@@ -19,6 +19,7 @@ namespace Cinema.Areas.Admin.Models
         public string HinhAnh { get; set; }
 
         [Required]
+        [StringLength(3)]
         public string GioiTinh { get; set; }
 
         [Required]
@@ -42,6 +43,6 @@ namespace Cinema.Areas.Admin.Models
 
         public int TrangThai { get; set; }
 
-        public ICollection<ThanhVienModel> list { get; set; }
+        public ICollection<HoaDonModel> lstHoaDon { get; set; }
     }
 }

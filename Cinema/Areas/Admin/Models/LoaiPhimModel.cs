@@ -13,7 +13,7 @@ namespace Cinema.Areas.Admin.Models
         [StringLength(50, MinimumLength = 3)]
         public string TenLoai { get; set; }
         public int TrangThai { get; set; }
-        public ICollection<LoaiPhimModel> lstPhim { get; set; }
+        public ICollection<PhimModel> lstPhim { get; set; }
 
     }
 }

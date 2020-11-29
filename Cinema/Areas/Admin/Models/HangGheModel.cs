@@ -10,16 +10,23 @@ namespace Cinema.Areas.Admin.Models
 {
     public class HangGheModel
     {
-        [Key] public int ID { get; set; }
+       
+        public int Id { get; set; }
+        [Required]
+        [StringLength(1)]
 
-        public int IDPhong { get; set; }
+        public string TenHang { get; set; }
 
-        [Required][StringLength(1)] public string TenHang { get; set; }
+        [Required]
+        public int MaPhong { get; set; }
+
+       
 
         public int TrangThai { get; set; }
 
-        [ForeignKey("IDPhong")] public virtual PhongModel Phong { get; set; }
+        [ForeignKey("MaPhong")]
+        public virtual PhongModel Phong { get; set; }
 
-        public ICollection<GheModel> listGhe { get; set; }
+        public ICollection<GheModel> lstGhe { get; set; }
     }
 }

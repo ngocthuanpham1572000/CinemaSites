@@ -15,12 +15,14 @@ namespace Cinema.Areas.Admin.Models
         [Required]
         public int TenPhong { get; set; }
 
+       
+        [Required]
+        public int MaRap { get; set; }
         public int TrangThai { get; set; }
-        public int Rap { get; set; }
-        [ForeignKey("Rap")]
-        public virtual RapPhimModel MaRapPhim { get; set; }
-        public ICollection<HangGheModel> LstHangGhe { get; set; }
-        public ICollection<SuatChieuModel> LstSuatChieu { get; set; }
+        [ForeignKey("MaRap")]
+        public virtual RapPhimModel Rap { get; set; }
+        public ICollection<HangGheModel> lstHangGhe { get; set; }
+        public ICollection<SuatChieuModel> lstSuatChieu { get; set; }
 
     }
 }

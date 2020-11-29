@@ -20,14 +20,16 @@ namespace Cinema.Areas.Admin.Models
         [Required]
         public string DiaChi { get; set; }
         [Required]
-        public int CumRap { get; set; }
-        [ForeignKey("CumRap")]
-        public virtual CumRapModel MaCumRap { get; set; }
+        public string HinhAnh { get; set; }
+        [Required]
+        public int MaCumRap { get; set; }
+        [ForeignKey("MaCumRap")]
+        public virtual CumRapModel CumRap { get; set; }
 
         [Required]
         public int TrangThai { get; set; }
 
-        public ICollection<PhongModel> LstPhong { get; set; }
+        public ICollection<PhongModel> lstPhong { get; set; }
         
        
 
