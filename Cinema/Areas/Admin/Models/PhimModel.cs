@@ -35,6 +35,7 @@ namespace Cinema.Areas.Admin.Models
         public int MaLoai { get; set; }
         [ForeignKey("MaLoai")]
         public virtual LoaiPhimModel Loai { get; set; }
+        public ICollection<SuatChieuModel> lstSuatChieu { get; set; }
 
     }
 }

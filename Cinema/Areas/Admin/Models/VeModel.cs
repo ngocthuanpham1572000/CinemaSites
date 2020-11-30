@@ -17,23 +17,17 @@ namespace Cinema.Areas.Admin.Models
         public decimal Gia { get; set; }
 
         public int MaHoaDon { get; set; }
-        public int MaSuatChieu { get; set; }
-        public int MaGhe { get; set; }
-
         [ForeignKey("MaHoaDon")]
-
         public virtual HoaDonModel HoaDon { get; set; }
 
-       
-
+        public int MaGhe { get; set; }
         [ForeignKey("MaGhe")]
         public virtual GheModel Ghe { get; set; }
 
-      
 
-        [ForeignKey("MaSuatChieu")]
+        public int MaSuat { get; set; }
+        [ForeignKey("MaSuat")]
         public virtual SuatChieuModel SuatChieu { get; set; }
-
 
         public int TrangThai { get; set; }
     }

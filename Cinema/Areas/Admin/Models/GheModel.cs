@@ -14,10 +14,11 @@ namespace Cinema.Areas.Admin.Models
 
       
 
-        public int MaHangGhe { get; set; }
+       
         public int TrangThai { get; set; }
+        public int MaHangGhe { get; set; }
         [ForeignKey("MaHangGhe")] public HangGheModel Hang { get; set; }
 
-      //  public ICollection<VeModel> lstVe { get; set; }
+         public ICollection<VeModel> lstVe { get; set; }
     }
 }

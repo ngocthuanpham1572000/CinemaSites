@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cinema.Migrations
 {
-    public partial class InnitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,11 +11,11 @@ namespace Cinema.Migrations
                 name: "tb_Admin",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TaiKhoan = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MatKhau = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    TaiKhoan = table.Column<string>(maxLength: 50, nullable: false),
+                    MatKhau = table.Column<string>(maxLength: 300, nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,10 +26,10 @@ namespace Cinema.Migrations
                 name: "tb_CumRap",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenCum = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    TenCum = table.Column<string>(maxLength: 50, nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,10 +40,10 @@ namespace Cinema.Migrations
                 name: "tb_LoaiPhim",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenLoai = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    TenLoai = table.Column<string>(maxLength: 50, nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,16 +54,16 @@ namespace Cinema.Migrations
                 name: "tb_ThanhVien",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ten = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    HinhAnh = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    GioiTinh = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    SDT = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    TaiKhoan = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    MatKhau = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    Ten = table.Column<string>(maxLength: 100, nullable: false),
+                    HinhAnh = table.Column<string>(maxLength: 50, nullable: true),
+                    GioiTinh = table.Column<string>(maxLength: 3, nullable: false),
+                    SDT = table.Column<string>(maxLength: 14, nullable: false),
+                    Email = table.Column<string>(maxLength: 100, nullable: false),
+                    TaiKhoan = table.Column<string>(maxLength: 300, nullable: false),
+                    MatKhau = table.Column<string>(maxLength: 300, nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,13 +74,13 @@ namespace Cinema.Migrations
                 name: "tb_RapPhim",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenRap = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    HinhAnh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaCumRap = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    TenRap = table.Column<string>(maxLength: 50, nullable: false),
+                    DiaChi = table.Column<string>(maxLength: 200, nullable: false),
+                    HinhAnh = table.Column<string>(nullable: false),
+                    MaCumRap = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,18 +97,18 @@ namespace Cinema.Migrations
                 name: "tb_Phim",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenPhim = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ThoiLuong = table.Column<int>(type: "int", nullable: false),
-                    DaoDien = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    DienVien = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    QuocGia = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Mota = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
-                    HinhAnh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Trailer = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayPhatHanh = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MaLoai = table.Column<int>(type: "int", nullable: false)
+                    TenPhim = table.Column<string>(maxLength: 50, nullable: false),
+                    ThoiLuong = table.Column<int>(nullable: false),
+                    DaoDien = table.Column<string>(maxLength: 50, nullable: true),
+                    DienVien = table.Column<string>(maxLength: 50, nullable: true),
+                    QuocGia = table.Column<string>(maxLength: 50, nullable: true),
+                    Mota = table.Column<string>(maxLength: 1000, nullable: true),
+                    HinhAnh = table.Column<string>(nullable: false),
+                    Trailer = table.Column<string>(nullable: true),
+                    NgayPhatHanh = table.Column<DateTime>(nullable: false),
+                    MaLoai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,12 +125,12 @@ namespace Cinema.Migrations
                 name: "tb_HoaDon",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NgayLap = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TongTien = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
-                    MaThanhVien = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    NgayLap = table.Column<DateTime>(nullable: false),
+                    TongTien = table.Column<decimal>(type: "decimal(18, 3)", nullable: false),
+                    MaThanhVien = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,11 +147,11 @@ namespace Cinema.Migrations
                 name: "tb_Phong",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenPhong = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    MaRap = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    TenPhong = table.Column<int>(maxLength: 50, nullable: false),
+                    MaRap = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -168,11 +168,11 @@ namespace Cinema.Migrations
                 name: "tb_HangGhe",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenHang = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
-                    MaPhong = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    TenHang = table.Column<string>(maxLength: 1, nullable: false),
+                    MaPhong = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,13 +189,13 @@ namespace Cinema.Migrations
                 name: "tb_SuatChieu",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NgayChieu = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ThoiGianBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MaPhong = table.Column<int>(type: "int", nullable: false),
-                    MaPhim = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    NgayChieu = table.Column<DateTime>(nullable: false),
+                    ThoiGianBatDau = table.Column<DateTime>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false),
+                    MaPhong = table.Column<int>(nullable: false),
+                    MaPhim = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -218,11 +218,11 @@ namespace Cinema.Migrations
                 name: "tb_Ghe",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenGhe = table.Column<int>(type: "int", nullable: false),
-                    MaHangGhe = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    TenGhe = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false),
+                    MaHangGhe = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -239,13 +239,13 @@ namespace Cinema.Migrations
                 name: "tb_Ve",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Gia = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
-                    MaHoaDon = table.Column<int>(type: "int", nullable: false),
-                    MaSuatChieu = table.Column<int>(type: "int", nullable: false),
-                    MaGhe = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false)
+                    Gia = table.Column<decimal>(type: "decimal(18, 3)", nullable: false),
+                    MaHoaDon = table.Column<int>(nullable: false),
+                    MaGhe = table.Column<int>(nullable: false),
+                    MaSuat = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,11 +263,11 @@ namespace Cinema.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tb_Ve_tb_SuatChieu_MaSuatChieu",
-                        column: x => x.MaSuatChieu,
+                        name: "FK_tb_Ve_tb_SuatChieu_MaSuat",
+                        column: x => x.MaSuat,
                         principalTable: "tb_SuatChieu",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -321,9 +321,9 @@ namespace Cinema.Migrations
                 column: "MaHoaDon");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_Ve_MaSuatChieu",
+                name: "IX_tb_Ve_MaSuat",
                 table: "tb_Ve",
-                column: "MaSuatChieu");
+                column: "MaSuat");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

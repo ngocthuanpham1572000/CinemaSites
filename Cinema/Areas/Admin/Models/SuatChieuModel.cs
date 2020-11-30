@@ -9,8 +9,9 @@ namespace Cinema.Areas.Admin.Models
 {
     public class SuatChieuModel
     {
-        [Key] 
+       [Key]
         public int Id { get; set;}
+
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -21,14 +22,16 @@ namespace Cinema.Areas.Admin.Models
         [DataType(DataType.Time)]
         public DateTime ThoiGianBatDau { get; set; }
 
+     
         [Required]
-        public int MaPhong { get; set; }
-        [Required]
-        public int MaPhim { get; set; }
+      
         public int TrangThai { get; set; }
 
+        [Required]
+        public int MaPhong { get; set; }
         [ForeignKey("MaPhong")] 
         public virtual PhongModel Phong { get; set; }
+        public int MaPhim { get; set; }
         [ForeignKey("MaPhim")]
         public virtual PhimModel Phim { get; set; }
 

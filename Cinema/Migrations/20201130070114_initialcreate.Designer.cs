@@ -10,33 +10,33 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinema.Migrations
 {
     [DbContext(typeof(DPContext))]
-    [Migration("20201129055710_InnitialCreate")]
-    partial class InnitialCreate
+    [Migration("20201130070114_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.AdminModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("MatKhau")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
 
                     b.Property<string>("TaiKhoan")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -51,12 +51,12 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("TenCum")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -71,7 +71,7 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("MaHangGhe")
                         .HasColumnType("int");
@@ -94,15 +94,15 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("MaPhong")
                         .HasColumnType("int");
 
                     b.Property<string>("TenHang")
                         .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(1)")
+                        .HasMaxLength(1);
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -119,7 +119,7 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("MaThanhVien")
                         .HasColumnType("int");
@@ -128,7 +128,7 @@ namespace Cinema.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("TongTien")
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(18, 3)");
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -145,12 +145,12 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("TenLoai")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -165,15 +165,15 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DaoDien")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("DienVien")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("HinhAnh")
                         .IsRequired()
@@ -183,20 +183,20 @@ namespace Cinema.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Mota")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<DateTime>("NgayPhatHanh")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("QuocGia")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("TenPhim")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("ThoiLuong")
                         .HasColumnType("int");
@@ -216,14 +216,14 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("MaRap")
                         .HasColumnType("int");
 
                     b.Property<int>("TenPhong")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(50);
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -240,12 +240,12 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DiaChi")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<string>("HinhAnh")
                         .IsRequired()
@@ -256,8 +256,8 @@ namespace Cinema.Migrations
 
                     b.Property<string>("TenRap")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -274,7 +274,7 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("MaPhim")
                         .HasColumnType("int");
@@ -305,41 +305,41 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("GioiTinh")
                         .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("nvarchar(3)");
+                        .HasColumnType("nvarchar(3)")
+                        .HasMaxLength(3);
 
                     b.Property<string>("HinhAnh")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("MatKhau")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
 
                     b.Property<string>("SDT")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
+                        .HasColumnType("nvarchar(14)")
+                        .HasMaxLength(14);
 
                     b.Property<string>("TaiKhoan")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
 
                     b.Property<string>("Ten")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
@@ -354,10 +354,10 @@ namespace Cinema.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<decimal>("Gia")
-                        .HasColumnType("decimal(18,3)");
+                        .HasColumnType("decimal(18, 3)");
 
                     b.Property<int>("MaGhe")
                         .HasColumnType("int");
@@ -365,7 +365,7 @@ namespace Cinema.Migrations
                     b.Property<int>("MaHoaDon")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaSuatChieu")
+                    b.Property<int>("MaSuat")
                         .HasColumnType("int");
 
                     b.Property<int>("TrangThai")
@@ -377,7 +377,7 @@ namespace Cinema.Migrations
 
                     b.HasIndex("MaHoaDon");
 
-                    b.HasIndex("MaSuatChieu");
+                    b.HasIndex("MaSuat");
 
                     b.ToTable("tb_Ve");
                 });
@@ -389,8 +389,6 @@ namespace Cinema.Migrations
                         .HasForeignKey("MaHangGhe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Hang");
                 });
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.HangGheModel", b =>
@@ -400,8 +398,6 @@ namespace Cinema.Migrations
                         .HasForeignKey("MaPhong")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Phong");
                 });
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.HoaDonModel", b =>
@@ -411,8 +407,6 @@ namespace Cinema.Migrations
                         .HasForeignKey("MaThanhVien")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ThanhVien");
                 });
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.PhimModel", b =>
@@ -422,8 +416,6 @@ namespace Cinema.Migrations
                         .HasForeignKey("MaLoai")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Loai");
                 });
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.PhongModel", b =>
@@ -433,8 +425,6 @@ namespace Cinema.Migrations
                         .HasForeignKey("MaRap")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Rap");
                 });
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.RapPhimModel", b =>
@@ -444,14 +434,12 @@ namespace Cinema.Migrations
                         .HasForeignKey("MaCumRap")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CumRap");
                 });
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.SuatChieuModel", b =>
                 {
                     b.HasOne("Cinema.Areas.Admin.Models.PhimModel", "Phim")
-                        .WithMany()
+                        .WithMany("lstSuatChieu")
                         .HasForeignKey("MaPhim")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -461,16 +449,12 @@ namespace Cinema.Migrations
                         .HasForeignKey("MaPhong")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Phim");
-
-                    b.Navigation("Phong");
                 });
 
             modelBuilder.Entity("Cinema.Areas.Admin.Models.VeModel", b =>
                 {
                     b.HasOne("Cinema.Areas.Admin.Models.GheModel", "Ghe")
-                        .WithMany()
+                        .WithMany("lstVe")
                         .HasForeignKey("MaGhe")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -483,57 +467,9 @@ namespace Cinema.Migrations
 
                     b.HasOne("Cinema.Areas.Admin.Models.SuatChieuModel", "SuatChieu")
                         .WithMany("lstVe")
-                        .HasForeignKey("MaSuatChieu")
+                        .HasForeignKey("MaSuat")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Ghe");
-
-                    b.Navigation("HoaDon");
-
-                    b.Navigation("SuatChieu");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.CumRapModel", b =>
-                {
-                    b.Navigation("lstRapPhim");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.HangGheModel", b =>
-                {
-                    b.Navigation("lstGhe");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.HoaDonModel", b =>
-                {
-                    b.Navigation("lstVe");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.LoaiPhimModel", b =>
-                {
-                    b.Navigation("lstPhim");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.PhongModel", b =>
-                {
-                    b.Navigation("lstHangGhe");
-
-                    b.Navigation("lstSuatChieu");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.RapPhimModel", b =>
-                {
-                    b.Navigation("lstPhong");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.SuatChieuModel", b =>
-                {
-                    b.Navigation("lstVe");
-                });
-
-            modelBuilder.Entity("Cinema.Areas.Admin.Models.ThanhVienModel", b =>
-                {
-                    b.Navigation("lstHoaDon");
                 });
 #pragma warning restore 612, 618
         }
