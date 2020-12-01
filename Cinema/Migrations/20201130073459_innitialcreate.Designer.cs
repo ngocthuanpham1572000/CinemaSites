@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cinema.Migrations
 {
     [DbContext(typeof(DPContext))]
-    [Migration("20201130070114_initialcreate")]
-    partial class initialcreate
+    [Migration("20201130073459_innitialcreate")]
+    partial class innitialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -203,6 +203,9 @@ namespace Cinema.Migrations
 
                     b.Property<string>("Trailer")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -202,6 +202,9 @@ namespace Cinema.Migrations
                     b.Property<string>("Trailer")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MaLoai");

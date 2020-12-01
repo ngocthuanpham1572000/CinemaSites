@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cinema.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class innitialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,7 +108,8 @@ namespace Cinema.Migrations
                     HinhAnh = table.Column<string>(nullable: false),
                     Trailer = table.Column<string>(nullable: true),
                     NgayPhatHanh = table.Column<DateTime>(nullable: false),
-                    MaLoai = table.Column<int>(nullable: false)
+                    MaLoai = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
