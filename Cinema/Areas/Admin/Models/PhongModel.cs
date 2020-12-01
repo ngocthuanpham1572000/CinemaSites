@@ -13,7 +13,7 @@ namespace Cinema.Areas.Admin.Models
 
         [StringLength(50, MinimumLength = 3)]
         [Required]
-        public int TenPhong { get; set; }
+        public string TenPhong { get; set; }
 
        
         [Required]
