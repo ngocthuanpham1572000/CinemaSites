@@ -9,6 +9,10 @@ namespace Cinema.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomePageController : Controller
     {
+        public IActionResult Login()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();
