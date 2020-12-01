@@ -6,7 +6,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" asp-area="Admin" asp-controller="HomePage" asp-action="Index">
                 <i class="mdi mdi-home menu-icon"></i>
                 <span class="menu-title">Trang chủ</span>
             </a>
@@ -36,8 +36,8 @@
                     <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Cụm rạp</a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Rạp</a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Phòng</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Hàng ghế</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Ghế</a></li>
+                    <li class="nav-item"> <a class="nav-link"  asp-action="Index" asp-controller="HangGhe" asp-area="Admin" >Hàng ghế</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Ghe" asp-area="Admin" >Ghế</a></li>
 
 
                 </ul>
@@ -52,18 +52,18 @@
             <div class="collapse" id="account-basic">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Admin</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Thành viên</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="ThanhVien" asp-action="Index">Thành viên</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" asp-area="Admin" asp-controller="Ve" asp-action="Index">
                 <i class="mdi mdi-home menu-icon"></i>
                 <span class="menu-title">Vé</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" asp-area="Admin" asp-controller="HoaDon" asp-action="Index">
                 <i class="mdi mdi-home menu-icon"></i>
                 <span class="menu-title">Hoá đơn</span>
             </a>
