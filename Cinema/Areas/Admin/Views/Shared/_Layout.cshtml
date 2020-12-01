@@ -15,12 +15,12 @@
             @await Html.PartialAsync("_SidebarPartial.cshtml")
             <div class="main-panel">
                 @RenderBody()
-                @await Html.PartialAsync("_FooterPartial.cshtml")
+
             </div>
-            </div>
-          
         </div>
-   
+
+    </div>
+    @await Html.PartialAsync("_FooterPartial.cshtml")
     @await Html.PartialAsync("_ScriptPartial.cshtml")
     @RenderSection("Scripts", required: false)
 
