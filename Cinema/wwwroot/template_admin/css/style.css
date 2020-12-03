@@ -21890,4 +21890,33 @@ dl li {
   outline: 1px solid slategrey;
 }
 
+dt{
+    margin-bottom:20px;
+}
+
+.fa-edit {
+    font-size: 1.5rem;
+    margin-right: 7px;
+    margin-left: 15px;
+    color: #4d83ff
+}
+.fa-info {
+    font-size: 1.5rem;
+    color: #7cfe7c;
+    margin-right: 7px;
+    margin-left: 15px;
+}
+.fa-trash-alt {
+    font-size: 1.5rem;
+    color: red;
+    margin-right: 7px;
+    margin-left: 15px;
+}
+
+.fa-home {
+    font-size: 1.5rem;
+    color: #4d83ff;
+    margin-right: 7px;
+    margin-left: 15px;
+}
 /*# sourceMappingURL=maps/style.css.map */

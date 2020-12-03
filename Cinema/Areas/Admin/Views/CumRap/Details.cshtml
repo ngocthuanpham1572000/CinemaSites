@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@*<h1>Details</h1>
 
 <div>
     <h4>CumRapModel</h4>
@@ -27,4 +27,44 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>*@
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Cụm rạp</h2>
+                    <br />
+                  
+                    <p class="card-description">
+                        Chi tiết
+                    </p>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            Tên cụm rạp
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TenCum)
+                        </dd>
+                        <dt class="col-sm-2" hidden>
+                            Trạng thái
+                        </dt>
+                        <dd class="col-sm-10" hidden>
+                            @Html.DisplayFor(model => model.TrangThai)
+                        </dd>
+                    </dl>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id"><i class="fas fa-edit"></i>Sửa</a> 
+                        <a asp-action="Index"><i class="fas fa-home"></i>Trang chủ</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+       
+    </div>
+
 </div>

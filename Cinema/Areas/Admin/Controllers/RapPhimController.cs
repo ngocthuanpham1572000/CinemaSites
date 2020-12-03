@@ -138,6 +138,7 @@ namespace Cinema.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
 
             return View(rapPhimModel);
         }
