@@ -53,7 +53,7 @@ namespace Cinema
             {
                 endpoints.MapControllerRoute(
                name: "MyArea",
-                 pattern: "{area:exists}/{controller=HomePage}/{action=Login}/{id?}");
+                 pattern: "{area:exists}/{controller=HomePage}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
