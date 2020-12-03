@@ -6,12 +6,15 @@ namespace Cinema.Areas.Admin.Models
     public class CumRapModel
     {
         public int Id { get; set; }
+
+        [Required]
         [StringLength(50, MinimumLength = 3)]
-        [Required]
         public string TenCum { get; set; }
-        [Required]
+        
         public int TrangThai { get; set; }
         public ICollection<RapPhimModel> lstRapPhim { get; set; }
+
+       
         // xong
     }
 }

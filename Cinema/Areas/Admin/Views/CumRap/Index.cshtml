@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -38,4 +38,60 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Cụm rạp</h2>
+                    <br />
+                  
+                    <p class="card-description">
+                        Danh sách các cụm rạp
+                    </p>
+                    <p>
+                        <a asp-action="Create">Tạo cụm rạp mới</a>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Tên phòng
+                                    </th>
+                                    <th hidden>
+                                       Trạng thái
+                                    </th>
+                                   
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TenCum)
+                                    </td>
+                                    <td hidden>
+                                        @Html.DisplayFor(modelItem => item.TrangThai)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a> 
+                                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info"></i></a> 
+                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
