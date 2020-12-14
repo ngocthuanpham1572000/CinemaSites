@@ -5,7 +5,11 @@
 }
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-        <li class="nav-item">
+
+        <li class="nav-item-active">
+
+       
+
             <a class="nav-link" asp-area="Admin" asp-controller="HomePage" asp-action="Index">
                 <i class="mdi mdi-home menu-icon"></i>
                 <span class="menu-title">Trang chủ</span>
@@ -26,17 +30,24 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#cinema-basic" aria-expanded="false" aria-controls="cinema-basic">
+            <a class="nav-link" data-toggle="collapse" href="#cinema" aria-expanded="false" aria-controls="cinema">
                 <i class="mdi mdi-circle-outline menu-icon"></i>
                 <span class="menu-title">Rạp phim</span>
                 <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="cinema-basic">
+            <div class="collapse" id="cinema">
                 <ul class="nav flex-column sub-menu">
 
                     <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="CumRap" asp-action="Index">Cụm rạp</a></li>
                     <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="RapPhim" asp-action="Index">Rạp</a></li>
+<<<<<<< HEAD
                     <li class="nav-item"> <a class="nav-link"asp-area="Admin" asp-controller="Phong" asp-action="Index">Phòng</a></li>
+=======
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="Phong" asp-action="Index">Phòng</a></li>
+                  
+
+          
+>>>>>>> 800c4ee599e029be26a9da311630a4de8e6c5053
                     <li class="nav-item"> <a class="nav-link"  asp-action="Index" asp-controller="HangGhe" asp-area="Admin" >Hàng ghế</a></li>
                     <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Ghe" asp-area="Admin" >Ghế</a></li>
 
@@ -45,6 +56,7 @@
                 </ul>
             </div>
         </li>
+       
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#account-basic" aria-expanded="false" aria-controls="account-basic">
                 <i class="mdi mdi-circle-outline menu-icon"></i>
