@@ -81,17 +81,21 @@ namespace Cinema.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string ten = Path.GetFileNameWithoutExtension(imageUpload.FileName);
-                string duoi = Path.GetExtension(imageUpload.FileName);
+                
+
+                thanhVienModel.HinhAnh = "hinh1";
+                _context.Update(thanhVienModel);
+                await _context.SaveChangesAsync();
                 var path = Path.Combine(
-                    Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien", ten + duoi);
+                    Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien", 
+                    thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length-1]);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await imageUpload.CopyToAsync(stream);
                 }
 
-                thanhVienModel.HinhAnh = ten + duoi;
+                thanhVienModel.HinhAnh = thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length - 1];
                 //thanhVienModel.MatKhau = EncMD5(matkhau);
                 _context.Update(thanhVienModel);
                 await _context.SaveChangesAsync();
@@ -141,12 +145,12 @@ namespace Cinema.Areas.Admin.Controllers
                         string duoi = Path.GetExtension(imageUpload.FileName);
                         path = Path.Combine(
                             Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien",
-                            ten + duoi);
+                              thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length - 1]);
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await imageUpload.CopyToAsync(stream);
                         }
-                        thanhVienModel.HinhAnh = ten + duoi;
+                        thanhVienModel.HinhAnh = thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length - 1];
 
                         _context.Update(thanhVienModel);
                     }
