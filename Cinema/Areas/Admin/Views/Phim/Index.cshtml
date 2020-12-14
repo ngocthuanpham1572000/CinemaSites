@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -49,47 +49,187 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenPhim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThoiLuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DaoDien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DienVien)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuocGia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mota)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trailer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayPhatHanh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Loai.TenLoai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenPhim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThoiLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DaoDien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DienVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuocGia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mota)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HinhAnh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trailer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayPhatHanh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Loai.TenLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
-</table>
+</table>*@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2 style="display:inline">Phim</h2>
+                    <a onclick="showInPopup('@Url.Action("UpdateTrangThai","Phim",null,Context.Request.Scheme)','Cập nhật trạng thái')" href="" class="btn btn-success " style="position:absolute; right:10px;" >Cập nhật trạng thái</a>
+                    <br />
+
+                    <p class="card-description">
+                        Danh sách các phim
+                    </p>
+                    <p>
+                        <a asp-action="Create">Tạo phim mới</a>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Tên phim
+                                    </th>
+                                    <th>
+                                        Thời lượng
+                                    </th>
+                                    <th>
+                                        Đạo diễn
+                                    </th>
+                                    <th>
+                                        Diễn viên
+                                    </th>
+                                    <th>
+                                        Quốc gia
+                                    </th>
+                                    <th>
+                                        Mô tả
+                                    </th>
+                                    <th>
+                                        Hình ảnh
+                                    </th>
+                                    <th>
+                                        Trailer
+                                    </th>
+                                    <th>
+                                        Ngày phát hành
+                                    </th>
+                                    <th>
+                                        Thể loại
+                                    </th>
+                                    <th>
+                                        Trạng thái
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TenPhim)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ThoiLuong)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DaoDien)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DienVien)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.QuocGia)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Mota)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HinhAnh)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Trailer)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NgayPhatHanh)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MaLoai)
+                                        </td>
+                                        <td>
+                                            @if (item.TrangThai == 1)
+                                            {
+                                                @*@Html.DisplayFor(modelItem => "Đang chiếu")*@
+                                                <span>Đang chiếu</span>
+                                            }
+                                            @if (item.TrangThai == 2)
+                                            {
+                                                <span>Sắp chiếu</span>
+                                                @*@Html.DisplayFor(modelItem => "Sắp chiếu")*@
+                                            }
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id"></a>
+                                            <a asp-action="Details" asp-route-id="@item.Id"></a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id"></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="form-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@*Cập nhật trang thái*@</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@*Bạn có muốn cập nhật trạng thái phim?*@</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Cập nhật</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>

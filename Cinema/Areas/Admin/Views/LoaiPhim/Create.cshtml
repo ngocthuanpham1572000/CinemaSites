@@ -4,34 +4,49 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Loại phim</h2>
+                    <br />
 
-<h4>LoaiPhimModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TenLoai" class="control-label"></label>
-                <input asp-for="TenLoai" class="form-control" />
-                <span asp-validation-for="TenLoai" class="text-danger"></span>
+                    <p class="card-description">
+                        Thêm mới
+                    </p>
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="TenLoai" class="control-label">Tên loại</label>
+                            <input asp-for="TenLoai" class="form-control" />
+                            <span asp-validation-for="TenLoai" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="TrangThai" class="control-label">Trạng thái</label>
+                            <input asp-for="TrangThai" class="form-control" value="1" />
+                            <span asp-validation-for="TrangThai" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                        </div>
+
+
+
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="TrangThai" class="control-label"></label>
-                <input asp-for="TrangThai" class="form-control" />
-                <span asp-validation-for="TrangThai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
+    <div>
+        <a asp-action="Index">Quay lại danh sách</a>
+    </div>
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
