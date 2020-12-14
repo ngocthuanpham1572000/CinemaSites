@@ -2,9 +2,11 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = null;
 }
+@{using (Html.BeginForm("Create", "Thành viên", FormMethod.Post, new { enctype = "multipart/form-data" }))}
 <div class="container">
-    <h1 style="display:inline">Tạp phim mới</h1>
+    <h1 style="display:inline">Tạo phim mới</h1>
     @*<a href="" class="btn btn-success">Cập nhật trạng thái</a>*@
     <hr />
     <div class="row">
@@ -44,7 +46,7 @@
                 </div>
 
                 <div class="custom-file">
-                    <input accept="*.png|*.jpg|*.jpeg" type="file" class="custom-file-input" id="ful" name="ful" />
+                    <input accept="*.png|*.jpg|*.jpeg" type="file" class="custom-file-input" id="ful" name="ful" onchange="readURL(this,document.getElementById('imgPre'))" />
                     <label class="custom-file-label" for="ful">Chọn hình</label>
                 </div>
                 <div class="form-group">
@@ -74,7 +76,7 @@
                 </div>
                 <div class="form-group" hidden>
                     <label asp-for="HinhAnh" class="control-label"></label>
-                    <input asp-for="HinhAnh" class="form-control" value="demo.jpg"/>
+                    <input asp-for="HinhAnh" class="form-control" value="demo.jpg" />
                     <span asp-validation-for="HinhAnh" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -86,24 +88,24 @@
 
     <div>
         <a asp-action="Index">Back to List</a>
-    </div>  
+    </div>
 </div>
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script>
-              function readURL(input, idIMG) {
+    <script>
+        function readURL(input, idIMG) {
 
-                  if (input.files && input.files[0]) {
-                      var reader = new FileReader();
-                      reader.onload = function (e) {
-                          $(idIMG).attr('src', e.target.result);
-                      }
-                      reader.readAsDataURL(input.files[0]);
-                  }
-              }
-              $("#ful").change(function () { readURL(this, '#imgPre'); }
-              );
-</script>
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(idIMG).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        //$("#ful").change(function () { readURL(this, '#imgPre'); }
+        //);
+    </script>
 }

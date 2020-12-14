@@ -3,9 +3,9 @@
         type: "GET",
         url: url,
         success: function (res) {
-            $("#form-modal .modal-body").html(res);
-            $("#form-modal .modal-title").html(title);
-            $("#form-modal").modal('show');
+            $("#modal-update .modal-body").html(res);
+            $("#modal-update .modal-title").html(title);
+            $("#modal-update").modal('show');
         }
     })
 }

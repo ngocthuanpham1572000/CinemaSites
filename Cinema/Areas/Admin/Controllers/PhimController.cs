@@ -108,10 +108,11 @@ namespace Cinema.Areas.Admin.Controllers
                 {
                     item.TrangThai = 1;
                     _context.Update(item);
-                    await _context.SaveChangesAsync();
+                  
                 }    
-            }    
-            return View(await Phim.ToListAsync());
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Edit(int? id)
         {
