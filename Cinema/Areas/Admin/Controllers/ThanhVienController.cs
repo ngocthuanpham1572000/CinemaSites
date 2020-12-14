@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cinema.Areas.Admin.Data;
 using Cinema.Areas.Admin.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Cinema.Areas.Admin.Controllers
 {
@@ -15,15 +19,32 @@ namespace Cinema.Areas.Admin.Controllers
     {
         private readonly DPContext _context;
 
+        //public static string EncMD5(string password)
+        //{
+        //    MD5 md5 = new MD5CryptoServiceProvider();
+        //    UTF8Encoding encoder = new UTF8Encoding();
+        //    Byte[] originalBytes = encoder.GetBytes(password);
+        //    Byte[] encodedBytes = md5.ComputeHash(originalBytes);
+        //    password = BitConverter.ToString(encodedBytes).Replace("-", "");
+        //    var result = password.ToLower();
+        //    return result;
+        //}
+
         public ThanhVienController(DPContext context)
         {
             _context = context;
         }
 
         // GET: Admin/ThanhVienModels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string ten)
         {
-            return View(await _context.tb_ThanhVien.ToListAsync());
+            var thanhvien = from n in _context.tb_ThanhVien select n;
+            if (!String.IsNullOrEmpty(ten))
+            {
+                thanhvien = thanhvien.Where(y => y.Ten.Contains(ten));
+            }
+            thanhvien = thanhvien.Where(trangthai => trangthai.TrangThai == 1);
+            return View(await thanhvien.ToListAsync());
         }
 
         // GET: Admin/ThanhVienModels/Details/5
@@ -50,16 +71,29 @@ namespace Cinema.Areas.Admin.Controllers
             return View();
         }
 
+
         // POST: Admin/ThanhVienModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ten,HinhAnh,GioiTinh,SDT,Email,TaiKhoan,MatKhau,TrangThai")] ThanhVienModel thanhVienModel)
+        public async Task<IActionResult> Create([Bind("Id,Ten,HinhAnh,GioiTinh,SDT,Email,TaiKhoan,MatKhau,TrangThai")] ThanhVienModel thanhVienModel, IFormFile imageUpload, string matkhau)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(thanhVienModel);
+                string ten = Path.GetFileNameWithoutExtension(imageUpload.FileName);
+                string duoi = Path.GetExtension(imageUpload.FileName);
+                var path = Path.Combine(
+                    Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien", ten + duoi);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await imageUpload.CopyToAsync(stream);
+                }
+
+                thanhVienModel.HinhAnh = ten + duoi;
+                //thanhVienModel.MatKhau = EncMD5(matkhau);
+                _context.Update(thanhVienModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -86,8 +120,8 @@ namespace Cinema.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,HinhAnh,GioiTinh,SDT,Email,TaiKhoan,MatKhau,TrangThai")] ThanhVienModel thanhVienModel)
+        
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,HinhAnh,GioiTinh,SDT,Email,TaiKhoan,MatKhau,TrangThai")] ThanhVienModel thanhVienModel, IFormFile imageUpload, string matkhau)
         {
             if (id != thanhVienModel.Id)
             {
@@ -99,6 +133,23 @@ namespace Cinema.Areas.Admin.Controllers
                 try
                 {
                     _context.Update(thanhVienModel);
+                    if (imageUpload != null)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien", thanhVienModel.HinhAnh);
+                        System.IO.File.Delete(path);
+                        string ten = Path.GetFileNameWithoutExtension(imageUpload.FileName);
+                        string duoi = Path.GetExtension(imageUpload.FileName);
+                        path = Path.Combine(
+                            Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien",
+                            ten + duoi);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await imageUpload.CopyToAsync(stream);
+                        }
+                        thanhVienModel.HinhAnh = ten + duoi;
+
+                        _context.Update(thanhVienModel);
+                    }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -140,10 +191,11 @@ namespace Cinema.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var thanhVienModel = await _context.tb_ThanhVien.FindAsync(id);
-            _context.tb_ThanhVien.Remove(thanhVienModel);
+            var thanhvienModel = await _context.tb_ThanhVien.FindAsync(id);
+            _context.tb_ThanhVien.Remove(thanhvienModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+
         }
 
         private bool ThanhVienModelExists(int id)
@@ -151,4 +203,5 @@ namespace Cinema.Areas.Admin.Controllers
             return _context.tb_ThanhVien.Any(e => e.Id == id);
         }
     }
+    
 }
