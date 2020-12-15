@@ -21919,4 +21919,8 @@ dt{
     margin-right: 7px;
     margin-left: 15px;
 }
+
+.modal-body{
+    padding:0;
+}
 /*# sourceMappingURL=maps/style.css.map */
