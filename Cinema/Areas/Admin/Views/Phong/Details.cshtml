@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = null;
 }
 
 @*<h1>Details</h1>
@@ -35,46 +36,43 @@
     <a asp-action="Index">Back to List</a>
 </div>*@
 
-<div class="content-wrapper">
-    <div class="row">
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h2>Phòng</h2>
-                    <p class="card-description">
-                        Chi tiết phòng
-                    </p>
-                    <dl class="row">
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.TenPhong)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.TenPhong)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.TrangThai)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.TrangThai)
-                        </dd>
-                        <dt class="col-sm-2">
-                            @Html.DisplayNameFor(model => model.Rap)
-                        </dt>
-                        <dd class="col-sm-10">
-                            @Html.DisplayFor(model => model.Rap.DiaChi)
-                        </dd>
-                    </dl>
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@Model.Id">Chỉnh sửa</a> |
-                        <a asp-action="Index">Trở lại trang chủ</a>
-                    </div>
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h2>Phòng</h2>
+                <p class="card-description">
+                    Thông tin chi tiết phòng
+                </p>
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        Tên phòng
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.TenPhong)
+                    </dd>
+                    <dt class="col-sm-2" hidden>
+                        @Html.DisplayNameFor(model => model.TrangThai)
+                    </dt>
+                    <dd class="col-sm-10" hidden>
+                        @Html.DisplayFor(model => model.TrangThai)
+                    </dd>
+                    <dt class="col-sm-2">
+                       Rạp
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Rap.TenRap)
+                    </dd>
+                </dl>
+                <div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px">Đóng</button>
+
+
                 </div>
-                
+
             </div>
         </div>
     </div>
-    <div>
-        <a asp-action="Index">Quay lại trang chủ</a>
-    </div>
-
 </div>
+  

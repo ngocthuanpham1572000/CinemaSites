@@ -36,7 +36,7 @@
                         <img src="~/template_admin/images/no-image.jpg" class="img-thumbnail" id="previewImage" alt="Alternate Text" />
                     </div>
                     <div class="form-group">
-                        <select class="custom-select-sm" asp-for="MaCumRap"
+                        <select class="custom-select-sm form-control" asp-for="MaCumRap"
                                 asp-items="@(new SelectList(ViewBag.ListCumRap,"Id","TenCum"))">
                         </select>
                     </div>
@@ -46,6 +46,7 @@
                         <span asp-validation-for="TrangThai" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px">Huỷ</button>
                         <input type="submit" value="Tạo mới" class="btn btn-primary" />
                     </div>
                 </form>

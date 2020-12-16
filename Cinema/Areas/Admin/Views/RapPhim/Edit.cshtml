@@ -5,7 +5,7 @@
     Layout = null;
 }
 
-@{using (Html.BeginForm("Edit", "RapPhim", FormMethod.Post, new { enctype = "multipart/form-data" }))}
+
 
 
 <div class="row">
@@ -16,9 +16,8 @@
                 <p class="card-description">
                     Sửa thông tin rạp phim
                 </p>
-                <form asp-action="Edit">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
+                <form asp-action="Edit" enctype="multipart/form-data">
+                   
                     <div class="form-group">
                         <label asp-for="TenRap" class="control-label">Tên rạp</label>
                         <input asp-for="TenRap" class="form-control" />
@@ -37,8 +36,9 @@
                         <img src="~/template_admin/images/rapphim/@Model.HinhAnh" class="img-thumbnail" id="previewImage" alt="Alternate Text" />
                         <input type="hidden" asp-for="HinhAnh" />
                     </div>
+                   
                     <div class="form-group">
-                        <select class="custom-select-sm" asp-for="MaCumRap"
+                        <select class="custom-select-sm form-control" asp-for="MaCumRap"
                                 asp-items="@(new SelectList(ViewBag.ListCumRap,"Id","TenCum"))">
                         </select>
                     </div>
@@ -48,6 +48,7 @@
                         <span asp-validation-for="TrangThai" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px">Huỷ</button>
                         <input type="submit" value="Lưu" class="btn btn-primary" />
                     </div>
 

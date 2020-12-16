@@ -134,42 +134,46 @@ namespace Cinema.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
+              
+                    try
+                    {
+                 
                     _context.Update(rapPhimModel);
-                    if (ImageUpload != null)
-                    {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/rapphim", rapPhimModel.HinhAnh);
-                        System.IO.File.Delete(path);
-                        string ten = Path.GetFileNameWithoutExtension(ImageUpload.FileName);
-                        string duoi = Path.GetExtension(ImageUpload.FileName);
-                        path = Path.Combine(
-                            Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/rapphim",
-                              rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1]);
-                        using (var stream = new FileStream(path, FileMode.Create))
+                        if (ImageUpload != null)
                         {
-                            await ImageUpload.CopyToAsync(stream);
-                        }
-                       rapPhimModel.HinhAnh = rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1];
+                            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/rapphim", rapPhimModel.HinhAnh);
+                            System.IO.File.Delete(path);
+                            string ten = Path.GetFileNameWithoutExtension(ImageUpload.FileName);
+                            string duoi = Path.GetExtension(ImageUpload.FileName);
+                            path = Path.Combine(
+                                Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/rapphim",
+                                  rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1]);
+                            using (var stream = new FileStream(path, FileMode.Create))
+                            {
+                                await ImageUpload.CopyToAsync(stream);
+                            }
+                            rapPhimModel.HinhAnh = rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1];
 
-                        _context.Update(rapPhimModel);
+                            _context.Update(rapPhimModel);
+                        }
+                        await _context.SaveChangesAsync();
                     }
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RapPhimModelExists(rapPhimModel.Id))
+                    catch (DbUpdateConcurrencyException)
                     {
-                        return NotFound();
+                        if (!RapPhimModelExists(rapPhimModel.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                
             }
-            ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
+              
+                ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
             return View(rapPhimModel);
         }
 
@@ -199,7 +203,7 @@ namespace Cinema.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var rapPhimModel = await _context.tb_RapPhim.FindAsync(id);
-            _context.tb_RapPhim.Remove(rapPhimModel);
+            rapPhimModel.TrangThai = 0;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

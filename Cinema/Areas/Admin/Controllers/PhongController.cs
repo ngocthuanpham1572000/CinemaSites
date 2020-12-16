@@ -23,8 +23,12 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/Phong
         public async Task<IActionResult> Index()
         {
-            var dPContext = _context.tb_Phong.Include(p => p.Rap);
-            return View(await dPContext.ToListAsync());
+            var Phong = from m in _context.tb_Phong
+                          select m;
+            Phong = Phong.Include(r => r.Rap);
+            Phong = Phong.Where(x => x.TrangThai == 1);
+          
+            return View(await Phong.ToListAsync());
         }
 
         // GET: Admin/Phong/Details/5
@@ -49,7 +53,11 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/Phong/Create
         public IActionResult Create()
         {
-            ViewData["MaRap"] = new SelectList(_context.tb_RapPhim, "Id", "DiaChi");
+            var RapPhim = from m in _context.tb_RapPhim
+                         select m;
+            RapPhim = RapPhim.Where(x => x.TrangThai == 1);
+
+            ViewBag.ListRap = RapPhim.ToList();
             return View();
         }
 
@@ -78,6 +86,11 @@ namespace Cinema.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            var RapPhim = from m in _context.tb_RapPhim
+                          select m;
+            RapPhim = RapPhim.Where(x => x.TrangThai == 1);
+
+            ViewBag.ListRap = RapPhim.ToList();
             var phongModel = await _context.tb_Phong.FindAsync(id);
             if (phongModel == null)
             {
@@ -148,8 +161,9 @@ namespace Cinema.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var phongModel = await _context.tb_Phong.FindAsync(id);
-            _context.tb_Phong.Remove(phongModel);
+            phongModel.TrangThai = 0;
             await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 
