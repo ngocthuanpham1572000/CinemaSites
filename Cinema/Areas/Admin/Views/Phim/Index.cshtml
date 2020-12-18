@@ -153,55 +153,62 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TenPhim)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ThoiLuong)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DaoDien)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DienVien)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.QuocGia)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Mota)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.HinhAnh)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Trailer)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.NgayPhatHanh)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.MaLoai)
-                                        </td>
-                                        <td>
-                                            @if (item.TrangThai == 1)
-                                            {
-                                                @*@Html.DisplayFor(modelItem => "Đang chiếu")*@
-                                                <span>Đang chiếu</span>
-                                            }
-                                            @if (item.TrangThai == 2)
-                                            {
-                                                <span>Sắp chiếu</span>
-                                                @*@Html.DisplayFor(modelItem => "Sắp chiếu")*@
-                                            }
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id"></a>
-                                            <a asp-action="Details" asp-route-id="@item.Id"></a>
-                                            <a asp-action="Delete" asp-route-id="@item.Id"></a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TenPhim)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ThoiLuong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DaoDien)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DienVien)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.QuocGia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mota)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HinhAnh)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Trailer)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NgayPhatHanh)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MaLoai)
+                                    </td>
+                                    <td>
+                                        @if (item.TrangThai == 1)
+                                        {
+                                            @*@Html.DisplayFor(modelItem => "Đang chiếu")*@
+                                            <span>Đang chiếu</span>
+                                        }
+                                        @if (item.TrangThai == 2)
+                                        {
+                                            <span>Sắp chiếu</span>
+                                            @*@Html.DisplayFor(modelItem => "Sắp chiếu")*@
+                                        }
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                       
+                                    <td>
+
+                                        <a class="btn btn-info"  onclick="showModal('@Url.Action("Details","Phim",new {id = item.Id },Context.Request.Scheme)','Chi tiết phim')">Details</a>
+
+                                    </td>
+                                    <td>
+                                        
+                                        <a class="btn btn-danger" onclick="showModal('@Url.Action("Delete","Phim",new {id = item.Id },Context.Request.Scheme)','Xóa phim')">Delete</a>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -214,7 +221,7 @@
 
 
 </div>
-<!--<div class="modal" tabindex="-1" role="dialog" id="modal-update">
+<div class="modal" tabindex="-1" role="dialog" id="modal-update">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -226,13 +233,13 @@
             <div class="modal-body">
                 <p>Bạn có muốn cập nhật trạng thái phim?</p>
             </div>
-            <div class="modal-footer">-->
-@*<button type="button" >*@<!--<a class="btn btn-primary" asp-controller="Phim" asp-action="UpdateTrangThai">Cập nhật</a>-->@*</button>*@
-<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            <div class="modal-footer">
+<button type="button" ><a class="btn btn-primary" asp-controller="Phim" asp-action="UpdateTrangThai">Cập nhật</a></button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
             </div>
         </div>
     </div>
-</div>-->
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
