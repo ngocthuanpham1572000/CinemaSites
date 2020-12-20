@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cinema.Areas.Admin.Data;
 using Cinema.Areas.Admin.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Cinema.Areas.Admin.Controllers
 {
@@ -22,9 +24,15 @@ namespace Cinema.Areas.Admin.Controllers
 
         // GET: Admin/RapPhim
         public async Task<IActionResult> Index()
-        {
-            var dPContext = _context.tb_RapPhim.Include(r => r.CumRap);
-            return View(await dPContext.ToListAsync());
+            {
+            var Rap = from m in _context.tb_RapPhim
+                      select m;
+            Rap = Rap.Include(r => r.CumRap);
+            Rap = Rap.Where(x => x.TrangThai == 1);
+
+            return View(await Rap.ToListAsync());
+
+              
         }
 
         // GET: Admin/RapPhim/Details/5
@@ -49,7 +57,11 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/RapPhim/Create
         public IActionResult Create()
         {
-            ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum");
+            var CumRap = from m in _context.tb_CumRap
+                      select m;
+            CumRap = CumRap.Where(x => x.TrangThai == 1);
+
+            ViewBag.ListCumRap = CumRap.ToList();
             return View();
         }
 
@@ -58,11 +70,28 @@ namespace Cinema.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel)
+        public async Task<IActionResult> Create([Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel, IFormFile ImageUpload)
         {
+            var CumRap = from m in _context.tb_CumRap
+                         select m;
+            CumRap = CumRap.Where(x => x.TrangThai == 1);
+
+            ViewBag.ListCumRap = CumRap.ToList();
+            rapPhimModel.HinhAnh = "noimage.jpg";
             if (ModelState.IsValid)
             {
                 _context.Add(rapPhimModel);
+                await _context.SaveChangesAsync();
+
+
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/rapphim",
+                    rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ImageUpload.CopyToAsync(stream);
+                }
+                rapPhimModel.HinhAnh = rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1];
+                _context.Update(rapPhimModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -83,7 +112,11 @@ namespace Cinema.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
+            var CumRap = from m in _context.tb_CumRap
+                         select m;
+            CumRap = CumRap.Where(x => x.TrangThai == 1);
+
+            ViewBag.ListCumRap = CumRap.ToList();
             return View(rapPhimModel);
         }
 
@@ -92,7 +125,7 @@ namespace Cinema.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel, IFormFile ImageUpload)
         {
             if (id != rapPhimModel.Id)
             {
@@ -101,25 +134,46 @@ namespace Cinema.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
+              
+                    try
+                    {
+                 
                     _context.Update(rapPhimModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RapPhimModelExists(rapPhimModel.Id))
-                    {
-                        return NotFound();
+                        if (ImageUpload != null)
+                        {
+                            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/rapphim", rapPhimModel.HinhAnh);
+                            System.IO.File.Delete(path);
+                            string ten = Path.GetFileNameWithoutExtension(ImageUpload.FileName);
+                            string duoi = Path.GetExtension(ImageUpload.FileName);
+                            path = Path.Combine(
+                                Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/rapphim",
+                                  rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1]);
+                            using (var stream = new FileStream(path, FileMode.Create))
+                            {
+                                await ImageUpload.CopyToAsync(stream);
+                            }
+                            rapPhimModel.HinhAnh = rapPhimModel.Id + "." + ImageUpload.FileName.Split(".")[ImageUpload.FileName.Split(".").Length - 1];
+
+                            _context.Update(rapPhimModel);
+                        }
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!RapPhimModelExists(rapPhimModel.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
-                }
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
+                
             }
-            ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
+              
+                ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
             return View(rapPhimModel);
         }
 
@@ -149,7 +203,7 @@ namespace Cinema.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var rapPhimModel = await _context.tb_RapPhim.FindAsync(id);
-            _context.tb_RapPhim.Remove(rapPhimModel);
+            rapPhimModel.TrangThai = 0;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

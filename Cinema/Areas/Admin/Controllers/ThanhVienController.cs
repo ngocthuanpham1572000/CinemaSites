@@ -81,14 +81,14 @@ namespace Cinema.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
 
                 thanhVienModel.HinhAnh = "hinh1";
                 _context.Update(thanhVienModel);
                 await _context.SaveChangesAsync();
                 var path = Path.Combine(
-                    Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien", 
-                    thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length-1]);
+                    Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien",
+                    thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length - 1]);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -124,7 +124,7 @@ namespace Cinema.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+
         public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,HinhAnh,GioiTinh,SDT,Email,TaiKhoan,MatKhau,TrangThai")] ThanhVienModel thanhVienModel, IFormFile imageUpload, string matkhau)
         {
             if (id != thanhVienModel.Id)
@@ -207,5 +207,5 @@ namespace Cinema.Areas.Admin.Controllers
             return _context.tb_ThanhVien.Any(e => e.Id == id);
         }
     }
-    
+
 }

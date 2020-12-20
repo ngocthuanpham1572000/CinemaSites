@@ -2,45 +2,54 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = null;
 }
 
-@*<h1>Create</h1>
+@{using (Html.BeginForm("Create", "CumRap", FormMethod.Post, new { enctype = "multipart/form-data" }))}
 
-    <h4>CumRapModel</h4>
-    <hr />
+
     <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="TenCum" class="control-label"></label>
-                    <input asp-for="TenCum" class="form-control" />
-                    <span asp-validation-for="TenCum" class="text-danger"></span>
+        <div class="col-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                  
+                    <p class="card-description">
+                        Tạo cụm rạp mới
+                    </p>
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="TenCum" class="control-label">Tên cụm rạp</label>
+                            <input asp-for="TenCum" class="form-control" />
+                            <span asp-validation-for="TenCum" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="TrangThai" class="control-label">Trạng thái</label>
+                            <input asp-for="TrangThai" class="form-control" value="1" />
+                            <span asp-validation-for="TrangThai" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px">Huỷ</button>
+                            <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label asp-for="TrangThai" class="control-label"></label>
-                    <input asp-for="TrangThai" class="form-control" />
-                    <span asp-validation-for="TrangThai" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
 
-<div class="content-wrapper">
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@*<div class="content-wrapper">
     <div class="row">
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <h2>Cụm rạp</h2>
                     <br />
-                   
+
                     <p class="card-description">
                         Thêm mới
                     </p>
@@ -74,4 +83,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}*@

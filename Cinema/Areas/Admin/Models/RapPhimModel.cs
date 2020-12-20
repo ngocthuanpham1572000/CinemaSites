@@ -19,7 +19,7 @@ namespace Cinema.Areas.Admin.Models
         [StringLength(200, MinimumLength = 3)]
         [Required]
         public string DiaChi { get; set; }
-        [Required]
+       
         public string HinhAnh { get; set; }
         [Required]
         public int MaCumRap { get; set; }

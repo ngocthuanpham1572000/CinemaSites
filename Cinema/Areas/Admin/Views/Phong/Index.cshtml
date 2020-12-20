@@ -57,20 +57,23 @@
                         Danh sách các phòng
                     </p>
                     <p>
-                        <a asp-action="Create">Tạo phòng mới</a>
+                        <a onclick="showModal('@Url.Action("Create","Phong",null,Context.Request.Scheme)','Thêm phòng mới')" class="btn btn-success text-white" style="margin-bottom:10px">
+                            Thêm phòng mới
+                        </a>
                     </p>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>
-                                        @*@Html.DisplayNameFor(model => model.TenPhong)*@ Tên phòng
+                                        Tên phòng
                                     </th>
+
                                     <th>
-                                        @*@Html.DisplayNameFor(model => model.TrangThai)*@Trạng thái
+                                        Rạp
                                     </th>
-                                    <th>
-                                        @*@Html.DisplayNameFor(model => model.Rap)*@Rạp
+                                    <th hidden>
+                                        Trạng thái
                                     </th>
                                     <th></th>
                                 </tr>
@@ -78,22 +81,29 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TenPhong)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TrangThai)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Rap.DiaChi)
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Sửa</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Id">Chi tiết</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Id">Xoá</a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TenPhong)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Rap.TenRap)
+                                    </td>
+                                    <td hidden>
+                                        @Html.DisplayFor(modelItem => item.TrangThai)
+                                    </td>
+                                    <td>
+                                        <a onclick="showModal('@Url.Action("Edit","Phong",new {id = item.Id },Context.Request.Scheme)','Sửa thông tin phòng')" class="btn btn-primary text-white" style="margin-left:10px">
+                                            Sửa
+                                        </a>
+                                        <a onclick="showModal('@Url.Action("Details","Phong",new {id = item.Id },Context.Request.Scheme)','Thông tin chi tiết phòng')" class="btn btn-secondary text-white" style="margin-left:10px">
+                                            Chi tiết
+                                        </a>
+                                        <a onclick="showModal('@Url.Action("Delete","Phong",new {id = item.Id },Context.Request.Scheme)','Xoá phòng')" class="btn btn-warning text-white" style="margin-left:10px">
+                                            Xoá
+                                        </a>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

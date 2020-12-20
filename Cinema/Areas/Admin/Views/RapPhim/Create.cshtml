@@ -2,52 +2,64 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = null;
 }
 
-@*<h1>Create</h1>
+@{using (Html.BeginForm("Create", "CumRap", FormMethod.Post, new { enctype = "multipart/form-data" }))}
 
-<h4>RapPhimModel</h4>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TenRap" class="control-label"></label>
-                <input asp-for="TenRap" class="form-control" />
-                <span asp-validation-for="TenRap" class="text-danger"></span>
+    <div class="col-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                <p class="card-description">
+                    Thêm rạp phim mới
+                </p>
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TenRap" class="control-label">Tên rạp</label>
+                        <input asp-for="TenRap" class="form-control" />
+                        <span asp-validation-for="TenRap" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DiaChi" class="control-label">Địa chỉ</label>
+                        <input asp-for="DiaChi" class="form-control" />
+                        <span asp-validation-for="DiaChi" class="text-danger"></span>
+                    </div>
+                    <div class="custom-file">
+                        <input  type="file" name="ImageUpload" id="ImageUpload" accept="*.png|*.jpg" class="custom-file-input" onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+                        <label class="custom-file-label" for="ImageUpload">Chọn ảnh</label>
+                    </div>
+                    <div class="form-group">
+                        <img src="~/template_admin/images/no-image.jpg" class="img-thumbnail" id="previewImage" alt="Alternate Text" />
+                    </div>
+                    <div class="form-group">
+                        <select class="custom-select-sm form-control" asp-for="MaCumRap"
+                                asp-items="@(new SelectList(ViewBag.ListCumRap,"Id","TenCum"))">
+                        </select>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input asp-for="TrangThai" class="form-control" value="1" />
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px">Huỷ</button>
+                        <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="DiaChi" class="control-label"></label>
-                <input asp-for="DiaChi" class="form-control" />
-                <span asp-validation-for="DiaChi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HinhAnh" class="control-label"></label>
-                <input asp-for="HinhAnh" class="form-control" />
-                <span asp-validation-for="HinhAnh" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaCumRap" class="control-label"></label>
-                <select asp-for="MaCumRap" class ="form-control" asp-items="ViewBag.MaCumRap"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TrangThai" class="control-label"></label>
-                <input asp-for="TrangThai" class="form-control" />
-                <span asp-validation-for="TrangThai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
 
-<div class="content-wrapper">
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@*<div class="content-wrapper">
     <div class="row">
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
@@ -98,4 +110,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}*@

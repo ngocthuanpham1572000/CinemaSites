@@ -3,42 +3,6 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-@*<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenCum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrangThai)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenCum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>*@
 <div class="content-wrapper">
     <div class="row">
         <div class="col-12 grid-margin stretch-card">
@@ -46,46 +10,53 @@
                 <div class="card-body">
                     <h2>Cụm rạp</h2>
                     <br />
-                  
+                    <a onclick="showModal('@Url.Action("Create","CumRap",null,Context.Request.Scheme)','Thêm cụm rạp')" class="btn btn-success text-white" style="margin-bottom:10px">
+                        Thêm cụm rạp
+                    </a>
                     <p class="card-description">
                         Danh sách các cụm rạp
                     </p>
-                    <p>
-                        <a asp-action="Create">Tạo cụm rạp mới</a>
-                    </p>
+                    
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>
-                                        Tên phòng
+                                    <th width="60%">
+                                        Tên cụm
                                     </th>
                                     <th hidden>
-                                       Trạng thái
+                                        Trạng thái
                                     </th>
-                                   
+
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TenCum)
-                                    </td>
-                                    <td hidden>
-                                        @Html.DisplayFor(modelItem => item.TrangThai)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a> 
-                                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-info"></i></a> 
-                                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="far fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td width="60%">
+                                            @Html.DisplayFor(modelItem => item.TenCum)
+                                        </td>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.TrangThai)
+                                        </td>
+                                        <td>
+                                            <a onclick="showModal('@Url.Action("Edit","CumRap",new {id = item.Id },Context.Request.Scheme)','Sửa cụm rạp')" class="btn btn-primary text-white" style="margin-left:10px">
+                                                Sửa
+                                            </a>
+                                            <a onclick="showModal('@Url.Action("Details","CumRap",new {id = item.Id },Context.Request.Scheme)','Chi tiết cụm rạp')" class="btn btn-secondary text-white" style="margin-left:10px">
+                                                Chi tiết
+                                            </a>
+                                            <a onclick="showModal('@Url.Action("Delete","CumRap",new {id = item.Id },Context.Request.Scheme)','Xoá cụm rạp')" class="btn btn-warning text-white" style="margin-left:10px">
+                                               Xoá
+                                            </a>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
+                       
                     </div>
 
                 </div>
@@ -95,3 +66,4 @@
 
 
 </div>
+
