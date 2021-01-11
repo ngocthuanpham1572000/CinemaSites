@@ -27,7 +27,7 @@ namespace Cinema.Areas.Admin.Models
         public virtual CumRapModel CumRap { get; set; }
 
         [Required]
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
 
         public ICollection<PhongModel> lstPhong { get; set; }
         

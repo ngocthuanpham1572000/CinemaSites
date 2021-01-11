@@ -21,10 +21,10 @@
                 <label asp-for="MaRap" class="control-label"></label>
                 <select asp-for="MaRap" class ="form-control" asp-items="ViewBag.MaRap"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="TrangThai" class="control-label"></label>
-                <input asp-for="TrangThai" class="form-control" />
-                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -37,49 +37,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@*<div class="content-wrapper">
-    <div class="row">
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h2>Phòng</h2>
-                    <p class="card-description">
-                        Thêm một phòng mới
-                    </p>
-                    <form asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="TenPhong" class="control-label">Tên phòng</label>
-                            <input asp-for="TenPhong" class="form-control" />
-                            <span asp-validation-for="TenPhong" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="MaRap" class="control-label">Tên rạp</label>
-                            <select asp-for="MaRap" class="form-control" asp-items="ViewBag.MaRap"></select>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="TrangThai" class="control-label">Trạng thái</label>
-                            <input asp-for="TrangThai" class="form-control" />
-                            <span asp-validation-for="TrangThai" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Tạo mới" class="btn btn-primary" />
-                        </div>
-
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div>
-        <a asp-action="Index">Quay lại trang chủ</a>
-    </div>
-
-</div>*@
-
-
-
-            @section Scripts {
-                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-            }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

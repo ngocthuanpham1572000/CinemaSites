@@ -22,7 +22,7 @@ namespace Cinema.Areas.Admin.Models
 
        
 
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
 
         [ForeignKey("MaPhong")]
         public virtual PhongModel Phong { get; set; }

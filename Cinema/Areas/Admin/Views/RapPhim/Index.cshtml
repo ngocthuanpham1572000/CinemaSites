@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-@*<h1>Index</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -56,76 +56,4 @@
         </tr>
 }
     </tbody>
-</table>*@
-
-<div class="content-wrapper">
-    <div class="row">
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h2>Rạp phim</h2>
-                    <p class="card-description">
-                        Danh sách các cụm rạp
-                    </p>
-                    <p>
-                        <a asp-action="Create">Tạo cụm rạp mới</a>
-                    </p>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                       Tên rạp
-                                    </th>
-                                    <th>
-                                       Địa chỉ
-                                    </th>
-                                    <th>
-                                       Hình ảnh
-                                    </th>
-                                    <th>
-                                       Cụm rạp
-                                    </th>
-                                    <th hidden>
-                                       Trạng thái
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.TenRap)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.DiaChi)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.HinhAnh)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.CumRap.TenCum)
-                                        </td>
-                                        <td hidden>
-                                            @Html.DisplayFor(modelItem => item.TrangThai)
-                                        </td>
-                                        <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Id">Chi tiết</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Id">Xoá</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
+</table>

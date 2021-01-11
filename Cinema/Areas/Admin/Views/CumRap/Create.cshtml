@@ -4,73 +4,34 @@
     ViewData["Title"] = "Create";
 }
 
-@*<h1>Create</h1>
+<h1>Create</h1>
 
-    <h4>CumRapModel</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="TenCum" class="control-label"></label>
-                    <input asp-for="TenCum" class="form-control" />
-                    <span asp-validation-for="TenCum" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TrangThai" class="control-label"></label>
-                    <input asp-for="TrangThai" class="form-control" />
-                    <span asp-validation-for="TrangThai" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
-<div class="content-wrapper">
-    <div class="row">
-        <div class="col-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h2>Cụm rạp</h2>
-                    <br />
-                   
-                    <p class="card-description">
-                        Thêm mới
-                    </p>
-                    <form asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="TenCum" class="control-label">Tên cụm rạp</label>
-                            <input asp-for="TenCum" class="form-control" />
-                            <span asp-validation-for="TenCum" class="text-danger"></span>
-                        </div>
-                        <div class="form-group" hidden>
-                            <label asp-for="TrangThai" class="control-label">Trạng thái</label>
-                            <input asp-for="TrangThai" class="form-control" value="1" />
-                            <span asp-validation-for="TrangThai" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Tạo mới" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
+<h4>CumRapModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenCum" class="control-label"></label>
+                <input asp-for="TenCum" class="form-control" />
+                <span asp-validation-for="TenCum" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div>
-        <a asp-action="Index">Quay lại trang chủ</a>
-    </div>
-
 </div>
 
-
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

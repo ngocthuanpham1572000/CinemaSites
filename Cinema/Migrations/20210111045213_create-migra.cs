@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cinema.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class createmigra : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,7 @@ namespace Cinema.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TaiKhoan = table.Column<string>(maxLength: 50, nullable: false),
                     MatKhau = table.Column<string>(maxLength: 300, nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +29,7 @@ namespace Cinema.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenCum = table.Column<string>(maxLength: 50, nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +43,7 @@ namespace Cinema.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenLoai = table.Column<string>(maxLength: 50, nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,7 +63,7 @@ namespace Cinema.Migrations
                     Email = table.Column<string>(maxLength: 100, nullable: false),
                     TaiKhoan = table.Column<string>(maxLength: 300, nullable: false),
                     MatKhau = table.Column<string>(maxLength: 300, nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +80,7 @@ namespace Cinema.Migrations
                     DiaChi = table.Column<string>(maxLength: 200, nullable: false),
                     HinhAnh = table.Column<string>(nullable: false),
                     MaCumRap = table.Column<int>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,7 +109,7 @@ namespace Cinema.Migrations
                     Trailer = table.Column<string>(nullable: true),
                     NgayPhatHanh = table.Column<DateTime>(nullable: false),
                     MaLoai = table.Column<int>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,7 +131,7 @@ namespace Cinema.Migrations
                     NgayLap = table.Column<DateTime>(nullable: false),
                     TongTien = table.Column<decimal>(type: "decimal(18, 3)", nullable: false),
                     MaThanhVien = table.Column<int>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,7 +152,7 @@ namespace Cinema.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenPhong = table.Column<string>(maxLength: 50, nullable: false),
                     MaRap = table.Column<int>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -173,7 +173,7 @@ namespace Cinema.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenHang = table.Column<string>(maxLength: 1, nullable: false),
                     MaPhong = table.Column<int>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,7 +194,7 @@ namespace Cinema.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NgayChieu = table.Column<DateTime>(nullable: false),
                     ThoiGianBatDau = table.Column<DateTime>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<bool>(nullable: false),
                     MaPhong = table.Column<int>(nullable: false),
                     MaPhim = table.Column<int>(nullable: false)
                 },
@@ -222,7 +222,7 @@ namespace Cinema.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenGhe = table.Column<int>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false),
+                    TrangThai = table.Column<bool>(nullable: false),
                     MaHangGhe = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -246,7 +246,7 @@ namespace Cinema.Migrations
                     MaHoaDon = table.Column<int>(nullable: false),
                     MaGhe = table.Column<int>(nullable: false),
                     MaSuat = table.Column<int>(nullable: false),
-                    TrangThai = table.Column<int>(nullable: false)
+                    TrangThai = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
