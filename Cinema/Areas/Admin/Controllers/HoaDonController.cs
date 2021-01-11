@@ -20,14 +20,14 @@ namespace Cinema.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/HoaDonModels
+        // GET: Admin/HoaDon
         public async Task<IActionResult> Index()
         {
             var dPContext = _context.tb_HoaDon.Include(h => h.ThanhVien);
             return View(await dPContext.ToListAsync());
         }
 
-        // GET: Admin/HoaDonModels/Details/5
+        // GET: Admin/HoaDon/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,14 +46,14 @@ namespace Cinema.Areas.Admin.Controllers
             return View(hoaDonModel);
         }
 
-        // GET: Admin/HoaDonModels/Create
+        // GET: Admin/HoaDon/Create
         public IActionResult Create()
         {
             ViewData["MaThanhVien"] = new SelectList(_context.tb_ThanhVien, "Id", "Email");
             return View();
         }
 
-        // POST: Admin/HoaDonModels/Create
+        // POST: Admin/HoaDon/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -70,7 +70,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(hoaDonModel);
         }
 
-        // GET: Admin/HoaDonModels/Edit/5
+        // GET: Admin/HoaDon/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,7 +87,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(hoaDonModel);
         }
 
-        // POST: Admin/HoaDonModels/Edit/5
+        // POST: Admin/HoaDon/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -123,7 +123,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(hoaDonModel);
         }
 
-        // GET: Admin/HoaDonModels/Delete/5
+        // GET: Admin/HoaDon/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +142,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(hoaDonModel);
         }
 
-        // POST: Admin/HoaDonModels/Delete/5
+        // POST: Admin/HoaDon/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

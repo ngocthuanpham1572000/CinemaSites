@@ -2,10 +2,56 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = null;
 }
+@{using (Html.BeginForm("Create", "Thành viên", FormMethod.Post, new { enctype = "multipart/form-data" }))}
+<div class="container">
+    <h1 style="display:inline">Tạo phim mới</h1>
+    @*<a href="" class="btn btn-success">Cập nhật trạng thái</a>*@
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="TenPhim" class="control-label">Tên phim</label>
+                    <input asp-for="TenPhim" class="form-control" />
+                    <span asp-validation-for="TenPhim" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThoiLuong" class="control-label">Thời lượng(phút)</label>
+                    <input asp-for="ThoiLuong" class="form-control" />
+                    <span asp-validation-for="ThoiLuong" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DaoDien" class="control-label">Đạo diễn</label>
+                    <input asp-for="DaoDien" class="form-control" />
+                    <span asp-validation-for="DaoDien" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DienVien" class="control-label">Diễn viên</label>
+                    <input asp-for="DienVien" class="form-control" />
+                    <span asp-validation-for="DienVien" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="QuocGia" class="control-label">Quốc gia</label>
+                    <input asp-for="QuocGia" class="form-control" />
+                    <span asp-validation-for="QuocGia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Mota" class="control-label">Mô tả</label>
+                    @*<input asp-for="Mota" class="form-control" />*@
+                    <textarea class="form-control" asp-for="Mota" rows="3"></textarea>
+                    <span asp-validation-for="Mota" class="text-danger"></span>
+                </div>
 
-<h1>Create</h1>
+                <div class="custom-file">
+                    <input accept="*.png|*.jpg|*.jpeg" type="file" class="custom-file-input" id="ful" name="ful" onchange="readURL(this,document.getElementById('imgPre'))" />
+                    <label class="custom-file-label" for="ful">Chọn hình</label>
+                </div>
+                <div class="form-group">
 
+<<<<<<< HEAD
 <h4>PhimModel</h4>
 <hr />
 <div class="row">
@@ -61,22 +107,72 @@
                 <label asp-for="MaLoai" class="control-label"></label>
                 <select asp-for="MaLoai" class ="form-control" asp-items="ViewBag.MaLoai"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="TrangThai" class="control-label"></label>
-                <input asp-for="TrangThai" class="form-control" />
-                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+=======
+                    <img id="imgPre" src="~/template_admin/images/Phim/demo.jpg" alt="no image" class="img-thumbnail" />
+
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Trailer" class="control-label"></label>
+                    <input asp-for="Trailer" class="form-control" />
+                    <span asp-validation-for="Trailer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NgayPhatHanh" class="control-label">Ngày phát hành</label>
+                    <input asp-for="NgayPhatHanh" class="form-control" />
+                    <span asp-validation-for="NgayPhatHanh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @*<label asp-for="MaLoai" class="control-label">Loại phim</label>*@
+                    <select asp-for="MaLoai" class="form-control" asp-items="@(new SelectList(ViewBag.ListLoaiPhim,"Id","TenLoai"))"></select>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="TrangThai" class="control-label">Trạng thái</label>
+                    <input asp-for="TrangThai" class="form-control" value="1" />
+                    <span asp-validation-for="TrangThai" class="text-danger"></span>
+                </div>
+                <div class="form-group" hidden>
+                    <label asp-for="HinhAnh" class="control-label"></label>
+                    <input asp-for="HinhAnh" class="form-control" value="demo.jpg" />
+                    <span asp-validation-for="HinhAnh" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function readURL(input, idIMG) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(idIMG).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#ful").change(function () { readURL(this, '#imgPre'); }
+        );
+    </script>
 }

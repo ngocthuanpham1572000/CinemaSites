@@ -29,7 +29,7 @@ namespace Cinema.Areas.Admin.Models
         [ForeignKey("MaSuat")]
         public virtual SuatChieuModel SuatChieu { get; set; }
 
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
     }
 }
 

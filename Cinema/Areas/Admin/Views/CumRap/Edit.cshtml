@@ -5,10 +5,32 @@
     Layout = null;
 }
 
+<<<<<<< HEAD
+<h1>Edit</h1>
+=======
 @{using (Html.BeginForm("Edit", "CumRap", FormMethod.Post, new { enctype = "multipart/form-data" }))}
 
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
 
 <div class="row">
+<<<<<<< HEAD
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="TenCum" class="control-label"></label>
+                <input asp-for="TenCum" class="form-control" />
+                <span asp-validation-for="TenCum" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+=======
     <div class="col-12 stretch-card">
         <div class="card">
             <div class="card-body">
@@ -35,11 +57,17 @@
                         <input type="submit" value="Lưu" class="btn btn-primary" />
                     </div>
                 </form>
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
             </div>
         </div>
     </div>
 </div>
 
+<<<<<<< HEAD
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+=======
 
 @*<div class="content-wrapper">
     <div class="row">
@@ -79,6 +107,7 @@
     </div>
 
 </div>*@
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

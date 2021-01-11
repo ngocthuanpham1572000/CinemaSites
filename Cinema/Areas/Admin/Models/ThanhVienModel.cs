@@ -37,11 +37,10 @@ namespace Cinema.Areas.Admin.Models
 
 
         [Required]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
         [StringLength(300, MinimumLength = 6)]
         public string MatKhau { get; set; }
 
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
 
         public ICollection<HoaDonModel> lstHoaDon { get; set; }
     }

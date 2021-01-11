@@ -15,7 +15,7 @@ namespace Cinema.Areas.Admin.Models
       
 
        
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
         public int MaHangGhe { get; set; }
         [ForeignKey("MaHangGhe")] public HangGheModel Hang { get; set; }
 

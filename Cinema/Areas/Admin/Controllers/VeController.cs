@@ -20,14 +20,14 @@ namespace Cinema.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/VeModels
+        // GET: Admin/Ve
         public async Task<IActionResult> Index()
         {
             var dPContext = _context.tb_Ve.Include(v => v.Ghe).Include(v => v.HoaDon).Include(v => v.SuatChieu);
             return View(await dPContext.ToListAsync());
         }
 
-        // GET: Admin/VeModels/Details/5
+        // GET: Admin/Ve/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,7 +48,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(veModel);
         }
 
-        // GET: Admin/VeModels/Create
+        // GET: Admin/Ve/Create
         public IActionResult Create()
         {
             ViewData["MaGhe"] = new SelectList(_context.tb_Ghe, "Id", "Id");
@@ -57,7 +57,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/VeModels/Create
+        // POST: Admin/Ve/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -76,7 +76,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(veModel);
         }
 
-        // GET: Admin/VeModels/Edit/5
+        // GET: Admin/Ve/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,7 +95,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(veModel);
         }
 
-        // POST: Admin/VeModels/Edit/5
+        // POST: Admin/Ve/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -133,7 +133,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(veModel);
         }
 
-        // GET: Admin/VeModels/Delete/5
+        // GET: Admin/Ve/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -154,7 +154,7 @@ namespace Cinema.Areas.Admin.Controllers
             return View(veModel);
         }
 
-        // POST: Admin/VeModels/Delete/5
+        // POST: Admin/Ve/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

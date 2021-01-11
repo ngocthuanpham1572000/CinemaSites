@@ -26,7 +26,7 @@ namespace Cinema.Areas.Admin.Models
         [ForeignKey("MaThanhVien")]
         public virtual ThanhVienModel ThanhVien { get; set; }
 
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
         public ICollection<VeModel> lstVe { get; set; }
     }
 }

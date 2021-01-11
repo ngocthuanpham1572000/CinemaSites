@@ -23,10 +23,7 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/CumRap
         public async Task<IActionResult> Index()
         {
-            var CumRap = from m in _context.tb_CumRap
-                          select m;
-            CumRap = CumRap.Where(x => x.TrangThai == 1);
-            return View(await CumRap.ToListAsync());
+            return View(await _context.tb_CumRap.ToListAsync());
         }
 
         // GET: Admin/CumRap/Details/5

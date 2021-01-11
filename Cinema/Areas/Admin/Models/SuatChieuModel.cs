@@ -25,7 +25,7 @@ namespace Cinema.Areas.Admin.Models
      
         [Required]
       
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
 
         [Required]
         public int MaPhong { get; set; }

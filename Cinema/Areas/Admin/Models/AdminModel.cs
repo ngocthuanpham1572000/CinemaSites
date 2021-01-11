@@ -12,13 +12,17 @@ namespace Cinema.Areas.Admin.Models
 
         [Required] [StringLength(50)] public string TaiKhoan { get; set; }
 
-        [Required] [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")] [StringLength(300)] public string MatKhau { get; set; }
+        [Required]  [StringLength(300)] public string MatKhau { get; set; }
 
+<<<<<<< HEAD
         public int TrangThai { get; set; }
 
         internal object SelectToken(string v)
         {
             throw new NotImplementedException();
         }
+=======
+        public bool TrangThai { get; set; }
+>>>>>>> 6d05d023997803238f2f2e7c3458518a4f16f206
     }
 }

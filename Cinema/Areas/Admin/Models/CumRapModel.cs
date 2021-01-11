@@ -11,7 +11,7 @@ namespace Cinema.Areas.Admin.Models
         [StringLength(50, MinimumLength = 3)]
         public string TenCum { get; set; }
         
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
         public ICollection<RapPhimModel> lstRapPhim { get; set; }
 
        

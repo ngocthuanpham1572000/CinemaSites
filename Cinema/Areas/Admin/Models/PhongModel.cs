@@ -18,7 +18,7 @@ namespace Cinema.Areas.Admin.Models
        
         [Required]
         public int MaRap { get; set; }
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
         [ForeignKey("MaRap")]
         public virtual RapPhimModel Rap { get; set; }
         public ICollection<HangGheModel> lstHangGhe { get; set; }
