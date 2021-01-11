@@ -2,13 +2,18 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = null;
 }
 
+<<<<<<< HEAD
 <h1>Edit</h1>
+=======
+@{using (Html.BeginForm("Edit", "CumRap", FormMethod.Post, new { enctype = "multipart/form-data" }))}
 
-<h4>CumRapModel</h4>
-<hr />
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
+
 <div class="row">
+<<<<<<< HEAD
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -25,14 +30,84 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
+=======
+    <div class="col-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                <p class="card-description">
+                    Sửa thông tin cụm rạp
+                </p>
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="TenCum" class="control-label">Tên cụm rạp</label>
+                        <input asp-for="TenCum" class="form-control" />
+                        <span asp-validation-for="TenCum" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input asp-for="TrangThai" class="form-control" />
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px">Huỷ</button>
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                    </div>
+                </form>
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
+<<<<<<< HEAD
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+=======
+
+@*<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Cụm rạp</h2>
+                    <br />
+
+                    <p class="card-description">
+                        Sửa
+                    </p>
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="TenCum" class="control-label">Tên cụm rạp</label>
+                            <input asp-for="TenCum" class="form-control" />
+                            <span asp-validation-for="TenCum" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" hidden>
+                            <label asp-for="TrangThai" class="control-label"></label>
+                            <input asp-for="TrangThai" class="form-control" />
+                            <span asp-validation-for="TrangThai" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index"><i class="fas fa-home"></i>Trang chủ</a>
+    </div>
+
+</div>*@
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

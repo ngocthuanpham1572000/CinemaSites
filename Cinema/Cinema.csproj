@@ -91,6 +91,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\template_admin\images\rapphim\" />
     <Folder Include="wwwroot\template_admin\images\thanhvien\" />
   </ItemGroup>
 

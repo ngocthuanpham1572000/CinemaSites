@@ -52,12 +52,13 @@ namespace Cinema
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-               name: "MyArea",
-                 pattern: "{area:exists}/{controller=HomePage}/{action=Index}/{id?}");
+              name: "MyArea",
+                pattern: "{area:exists}/{controller=HomePage}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+               
 
 
             });

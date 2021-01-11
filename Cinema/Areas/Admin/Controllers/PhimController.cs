@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cinema.Areas.Admin.Data;
 using Cinema.Areas.Admin.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Cinema.Areas.Admin.Controllers
 {
@@ -23,8 +25,11 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/Phim
         public async Task<IActionResult> Index()
         {
-            var dPContext = _context.tb_Phim.Include(p => p.Loai);
-            return View(await dPContext.ToListAsync());
+            var Phim = from m in _context.tb_Phim.Include(p => p.Loai)
+                       select m;
+            Phim = Phim.Where(x => x.TrangThai != 0);
+            
+            return View(await Phim.ToListAsync());
         }
 
         // GET: Admin/Phim/Details/5
@@ -49,7 +54,8 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/Phim/Create
         public IActionResult Create()
         {
-            ViewData["MaLoai"] = new SelectList(_context.tb_LoaiPhim, "Id", "TenLoai");
+            ViewBag.ListLoaiPhim = _context.tb_LoaiPhim.ToList();
+         
             return View();
         }
 
@@ -58,19 +64,56 @@ namespace Cinema.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TenPhim,ThoiLuong,DaoDien,DienVien,QuocGia,Mota,HinhAnh,Trailer,NgayPhatHanh,MaLoai,TrangThai")] PhimModel phimModel)
+        public async Task<IActionResult> Create([Bind("Id,TenPhim,ThoiLuong,DaoDien,DienVien,QuocGia,Mota,HinhAnh,Trailer,NgayPhatHanh,MaLoai,TrangThai")] PhimModel phimModel,IFormFile ful)
         {
+           
             if (ModelState.IsValid)
             {
                 _context.Add(phimModel);
                 await _context.SaveChangesAsync();
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/Phim", phimModel.Id + "." + ful.FileName.Split(".")
+                    [ful.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ful.CopyToAsync(stream);
+                }
+                phimModel.HinhAnh = phimModel.Id + "." + ful.FileName.Split(".")
+                    [ful.FileName.Split(".").Length - 1];
+                if(phimModel.NgayPhatHanh>DateTime.Now)
+                {
+                    phimModel.TrangThai = 2;
+                }    
+                else
+                {
+                    phimModel.TrangThai = 1;
+                }    
+                _context.Update(phimModel);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaLoai"] = new SelectList(_context.tb_LoaiPhim, "Id", "TenLoai", phimModel.MaLoai);
+            //ViewData["MaLoai"] = new SelectList(_context.tb_LoaiPhim, "Id", "TenLoai", phimModel.MaLoai);
             return View(phimModel);
         }
 
         // GET: Admin/Phim/Edit/5
+        public async Task<IActionResult> UpdateTrangThai()
+        {
+
+            var Phim = from m in _context.tb_Phim.Include(p => p.Loai)
+                       select m;
+            Phim = Phim.Where(x => x.TrangThai != 0);
+            foreach(var item in Phim)
+            {
+                if(item.NgayPhatHanh<DateTime.Now)
+                {
+                    item.TrangThai = 1;
+                    _context.Update(item);
+                  
+                }    
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,7 +126,8 @@ namespace Cinema.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaLoai"] = new SelectList(_context.tb_LoaiPhim, "Id", "TenLoai", phimModel.MaLoai);
+            ViewBag.ListLoaiPhim = _context.tb_LoaiPhim.ToList();
+
             return View(phimModel);
         }
 
@@ -92,7 +136,7 @@ namespace Cinema.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TenPhim,ThoiLuong,DaoDien,DienVien,QuocGia,Mota,HinhAnh,Trailer,NgayPhatHanh,MaLoai,TrangThai")] PhimModel phimModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TenPhim,ThoiLuong,DaoDien,DienVien,QuocGia,Mota,HinhAnh,Trailer,NgayPhatHanh,MaLoai,TrangThai")] PhimModel phimModel,IFormFile ful)
         {
             if (id != phimModel.Id)
             {
@@ -104,6 +148,21 @@ namespace Cinema.Areas.Admin.Controllers
                 try
                 {
                     _context.Update(phimModel);
+                    if (ful != null)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/Phim", phimModel.HinhAnh);
+                        System.IO.File.Delete(path);
+
+                        path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/Phim", phimModel.Id + "." + ful.FileName.Split(".")
+                        [ful.FileName.Split(".").Length - 1]);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await ful.CopyToAsync(stream);
+                        }
+                        phimModel.HinhAnh = phimModel.Id + "." + ful.FileName.Split(".")
+                            [ful.FileName.Split(".").Length - 1];
+                        _context.Update(phimModel);
+                    }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -119,7 +178,7 @@ namespace Cinema.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaLoai"] = new SelectList(_context.tb_LoaiPhim, "Id", "TenLoai", phimModel.MaLoai);
+            //ViewData["MaLoai"] = new SelectList(_context.tb_LoaiPhim, "Id", "TenLoai", phimModel.MaLoai);
             return View(phimModel);
         }
 
@@ -148,7 +207,8 @@ namespace Cinema.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var phimModel = await _context.tb_Phim.FindAsync(id);
-            _context.tb_Phim.Remove(phimModel);
+            phimModel.TrangThai = 0;
+            _context.Update(phimModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

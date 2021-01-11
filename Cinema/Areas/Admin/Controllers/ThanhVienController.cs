@@ -59,7 +59,27 @@ namespace Cinema.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+<<<<<<< HEAD
                 _context.Add(thanhVienModel);
+=======
+
+
+                thanhVienModel.HinhAnh = "hinh1";
+                _context.Update(thanhVienModel);
+                await _context.SaveChangesAsync();
+                var path = Path.Combine(
+                    Directory.GetCurrentDirectory(), "wwwroot/template_admin/images/thanhvien",
+                    thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length - 1]);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await imageUpload.CopyToAsync(stream);
+                }
+
+                thanhVienModel.HinhAnh = thanhVienModel.Id + "." + imageUpload.FileName.Split(".")[imageUpload.FileName.Split(".").Length - 1];
+                //thanhVienModel.MatKhau = EncMD5(matkhau);
+                _context.Update(thanhVienModel);
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -86,8 +106,13 @@ namespace Cinema.Areas.Admin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+<<<<<<< HEAD
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,HinhAnh,GioiTinh,SDT,Email,TaiKhoan,MatKhau,TrangThai")] ThanhVienModel thanhVienModel)
+=======
+
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,HinhAnh,GioiTinh,SDT,Email,TaiKhoan,MatKhau,TrangThai")] ThanhVienModel thanhVienModel, IFormFile imageUpload, string matkhau)
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
         {
             if (id != thanhVienModel.Id)
             {
@@ -151,4 +176,8 @@ namespace Cinema.Areas.Admin.Controllers
             return _context.tb_ThanhVien.Any(e => e.Id == id);
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
 }

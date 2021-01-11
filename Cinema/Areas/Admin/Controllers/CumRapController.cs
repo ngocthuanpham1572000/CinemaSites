@@ -47,6 +47,8 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/CumRap/Create
         public IActionResult Create()
         {
+            
+
             return View();
         }
 

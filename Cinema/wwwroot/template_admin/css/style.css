@@ -76,6 +76,7 @@
   }
 }
 
+
 @-webkit-keyframes flash {
   0% {
     opacity: 1;
@@ -21918,5 +21919,9 @@ dt{
     color: #4d83ff;
     margin-right: 7px;
     margin-left: 15px;
+}
+
+.modal-body{
+    padding:0;
 }
 /*# sourceMappingURL=maps/style.css.map */

@@ -2,7 +2,9 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = null;
 }
+<<<<<<< HEAD
 
 <h1>Delete</h1>
 
@@ -49,3 +51,61 @@
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+=======
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Rạp phim</h2>
+                    <p class="card-description">
+                    </p>
+                    <h3>Bạn có thực sự muốn xoá?</h3>
+                    <br />
+                    <br />
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            Tên rạp
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.TenRap)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Địa chỉ
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.DiaChi)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Hình ảnh
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.HinhAnh)
+                        </dd>
+                        <dt class="col-sm-2">
+                            Cụm rạp
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.CumRap.TenCum)
+                        </dd>
+                        <dt class="col-sm-2" hidden>
+                            @Html.DisplayNameFor(model => model.TrangThai)
+                        </dt>
+                        <dd class="col-sm-10" hidden>
+                            @Html.DisplayFor(model => model.TrangThai)
+                        </dd>
+                    </dl>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-right:10px">Huỷ</button>
+                        <input type="submit" value="Xoá" class="btn btn-danger" />
+
+                    </form>
+
+              
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+>>>>>>> a93618663ad04386784ec38de2f51447886a3fba
