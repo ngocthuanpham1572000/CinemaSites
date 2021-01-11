@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cinema.Areas.Admin.Data;
 using Cinema.Areas.Admin.Models;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Cinema.Areas.Admin.Controllers
 {
@@ -20,11 +21,22 @@ namespace Cinema.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/Ghe
-        public async Task<IActionResult> Index()
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
-            var dPContext = _context.tb_Ghe.Include(g => g.Hang);
-            return View(await dPContext.ToListAsync());
+            ViewBag.ListGhe = _context.tb_Ghe.ToList();
+            base.OnActionExecuted(context);
+        }
+
+        // GET: Admin/Ghe
+        public async Task<IActionResult> Index(int? id)
+        {
+            ViewBag.ListHang = _context.tb_HangGhe.ToList();
+            GheModel ghe = null;
+            if (id != null)
+            {
+                ghe = await _context.tb_Ghe.FirstOrDefaultAsync(m => m.Id == id);
+            }
+            return View(ghe);
         }
 
         // GET: Admin/Ghe/Details/5

@@ -15,5 +15,10 @@ namespace Cinema.Areas.Admin.Models
         [Required] [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")] [StringLength(300)] public string MatKhau { get; set; }
 
         public int TrangThai { get; set; }
+
+        internal object SelectToken(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

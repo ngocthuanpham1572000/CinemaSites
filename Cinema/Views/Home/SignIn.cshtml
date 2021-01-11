@@ -1,4 +1,6 @@
-﻿<section class="account-section bg_img" >
+﻿@model Cinema.Areas.Admin.Models.ThanhVienModel
+
+<section class="account-section bg_img" >
     <div class="container">
         <div class="padding-top padding-bottom">
             <div class="account-area">
@@ -9,11 +11,11 @@
                 <form class="account-form">
                     <div class="form-group">
                         <label for="tel">Số điện thoại<span>*</span></label>
-                        <input type="tel" placeholder="Nhập Số điện thoại " id="phonenumber" required>
+                        <input type="tel" placeholder="Nhập Số điện thoại " asp-for="SDT" id="phonenumber" required>
                     </div>
                     <div class="form-group">
                         <label for="pass3">Password<span>*</span></label>
-                        <input type="password" placeholder="Nhập Password" id="pass3" required>
+                        <input type="password" placeholder="Nhập Password" asp-for="MatKhau" id="pass3" required>
                     </div>
                     <div class="form-group checkgroup">
                         <input type="checkbox" id="bal2" required checked>
@@ -21,7 +23,7 @@
                         <a href="#0" class="forget-pass">Quên mật khẩu?</a>
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" value="Đăng nhập">
+                        <input type="submit" asp-action="SignIn" value="Đăng nhập">
                     </div>
                 </form>
                 <div class="option">

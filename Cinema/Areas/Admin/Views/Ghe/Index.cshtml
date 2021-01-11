@@ -1,14 +1,11 @@
-﻿@model IEnumerable<Cinema.Areas.Admin.Models.GheModel>
+﻿@model Cinema.Areas.Admin.Models.GheModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<partial name="Create">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -25,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (GheModel item in ViewBag.ListGhe) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TenGhe)
