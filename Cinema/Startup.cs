@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cinema.Areas.Admin.Models;
 
 namespace Cinema
 {
@@ -27,6 +28,7 @@ namespace Cinema
         {
             services.AddControllersWithViews();
             services.AddDbContext<DPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DPContext")));
+<<<<<<< HEAD
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
@@ -34,6 +36,13 @@ namespace Cinema
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+=======
+<<<<<<< HEAD
+            services.AddTransient<ThanhVienModel, ThanhVienModel>();
+=======
+
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
+>>>>>>> 9d0fc5a3af840b352ca1f26dc0ed09dc1043136d
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +60,7 @@ namespace Cinema
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
 
             app.UseSession();
@@ -61,7 +70,11 @@ namespace Cinema
             {
                 endpoints.MapControllerRoute(
               name: "MyArea",
+<<<<<<< HEAD
                 pattern: "{area:exists}/{controller=HomePage}/{action=Login}/{id?}");
+=======
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+>>>>>>> 9d0fc5a3af840b352ca1f26dc0ed09dc1043136d
 
                 endpoints.MapControllerRoute(
                     name: "default",

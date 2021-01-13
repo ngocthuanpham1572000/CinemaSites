@@ -1,0 +1,89 @@
+﻿@model Cinema.Areas.Admin.Models.PhongModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<<<<<<< HEAD
+<h1>@(ViewContext.RouteData.Values["id"]!= null ?"Chỉnh sửa phòng":"Thêm phòng" )</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="@(ViewContext.RouteData.Values["id"]!=null ?"edit":"create")"
+              asp-action="@(ViewContext.RouteData.Values["id"] != null ?"Edit":"Create")" asp-route-id="@(ViewContext.RouteData.Values
+                ["id"]!= null ?ViewContext.RouteData.Values["id"]:"")">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @{
+                if (ViewContext.RouteData.Values["id"] != null)
+                {
+                    <input type="hidden" asp-for="Id" />
+                }
+            }
+            <div class="form-group">
+                <label asp-for="TenPhong" class="control-label">Tên phòng</label>
+                <input asp-for="TenPhong" class="form-control" />
+                <span asp-validation-for="TenPhong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaRap" class="control-label">Tên rạp</label>
+                <select asp-for="MaRap" class="form-control" asp-items="@(new SelectList(ViewBag.ListRap,"Id","TenRap"))"></select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TrangThai" /> Trạng thái
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" data-sucess="@(ViewContext.RouteData.Values["id"]!=null ?"edit_ph":"create_ph")"
+                       value="@(ViewContext.RouteData.Values["id"]!= null ?"Chỉnh sửa":"Thêm mới")" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+=======
+
+<div class="row">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Cụm rạp</p>
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TenPhong" class="control-label"></label>
+                        <input asp-for="TenPhong" class="form-control" />
+                        <span asp-validation-for="TenPhong" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MaRap" class="control-label"></label>
+                        <select asp-for="MaRap" class="form-control" asp-items="ViewBag.MaRap"></select>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+        
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5

@@ -16,7 +16,7 @@ using Newtonsoft.Json.Linq;
 namespace Cinema.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomePageController : Controller
+    public class HomeController : Controller
     {
         private readonly DPContext _context;
 

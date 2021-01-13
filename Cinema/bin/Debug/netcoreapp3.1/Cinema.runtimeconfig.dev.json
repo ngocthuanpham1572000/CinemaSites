@@ -1,8 +1,13 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\GAMING\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\GAMING\\.nuget\\packages"
+=======
+      "C:\\Users\\ngoct\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\ngoct\\.nuget\\packages"
+>>>>>>> 9d0fc5a3af840b352ca1f26dc0ed09dc1043136d
     ]
   }
 }

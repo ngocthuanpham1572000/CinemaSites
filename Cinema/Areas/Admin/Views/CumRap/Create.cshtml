@@ -1,0 +1,57 @@
+﻿@model Cinema.Areas.Admin.Models.CumRapModel
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+
+<h3>@(ViewContext.RouteData.Values["id"] != null ?"Chỉnh sửa cụm rạp":"Thêm cụm rạp mới")</h3>
+<div class="row">
+    <div class="col-md-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Cụm rạp</p>
+                <form id="@(ViewContext.RouteData.Values["id"]!=null?"edit-cumrap":"create-cumrap")" asp-action="@(ViewContext.RouteData.Values["id"]!=null?"Edit":"Create")"
+                      asp-route-id="@(ViewContext.RouteData.Values["id"]!=null ? ViewContext.RouteData.Values["id"]:"")">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @{
+                        if (ViewContext.RouteData.Values["id"] != null)
+                        {
+                            <input type="hidden" asp-for="Id" />
+                        }
+                    }
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="TenCum" class="control-label">Tên cụm rạp</label>
+                                <input required asp-for="TenCum" class="form-control" />
+                                <span asp-validation-for="TenCum" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group form-check" hidden>
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="TrangThai" /> Trạng thái
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="@(ViewContext.RouteData.Values["id"]!=null?"Cập nhật":"Thêm mới")"
+                                       data-suscess="" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
