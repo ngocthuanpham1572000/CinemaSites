@@ -15,10 +15,17 @@
             @await Html.PartialAsync("_SidebarPartial.cshtml")
             <div class="main-panel">
                 @RenderBody()
+<<<<<<< HEAD
 
             </div>
         </div>
 
+=======
+
+
+            </div>
+        </div>
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
         <div class="modal fade" id="modal-tb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -37,12 +44,17 @@
                 </div>
             </div>
         </div>
-        
+
+       
+
     </div>
+
+
+
+    @await Html.PartialAsync("_FooterPartial.cshtml")
+    @await Html.PartialAsync("_ScriptPartial.cshtml")
    
-        @await Html.PartialAsync("_FooterPartial.cshtml")
-        @await Html.PartialAsync("_ScriptPartial.cshtml")
-        @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

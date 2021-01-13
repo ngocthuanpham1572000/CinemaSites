@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 ﻿@model Cinema.Areas.Admin.Models.PhongModel
+=======
+﻿@model IEnumerable<Cinema.Areas.Admin.Models.PhongModel>
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
 
 @{
     ViewData["Title"] = "Index";
 }
 
+<<<<<<< HEAD
 @{
     if (ViewContext.RouteData.Values["id"] != null)
     {
@@ -41,10 +46,18 @@
 <div class="container-fluid mt-3">
     <p>Có @(((ICollection<PhongModel>)ViewBag.ListPh).Count)  thành viên</p>
 </div>
+=======
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
 <table class="table">
     <thead>
         <tr>
             <th>
+<<<<<<< HEAD
                 Tên phòng
             </th>
             <th>
@@ -52,18 +65,32 @@
             </th>
             <th>
                 Trạng thái
+=======
+                @Html.DisplayNameFor(model => model.TenPhong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rap)
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
         @foreach (PhongModel item in ViewBag.ListPh)
+=======
+        @foreach (var item in Model)
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.TenPhong)
                 </td>
                 <td>
+<<<<<<< HEAD
                     @Html.DisplayFor(modelItem => item.Rap.TenRap)
                 </td>
                 <td>
@@ -84,11 +111,23 @@
                             }
                         }
                     </button>
+=======
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rap.DiaChi)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<<<<<<< HEAD
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
@@ -203,3 +242,5 @@
         }
     </script>
 }
+=======
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Cinema.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomePageController : Controller
+    public class HomeController : Controller
     {
         public IActionResult Login()
         {

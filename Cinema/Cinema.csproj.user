@@ -2,7 +2,11 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_SelectedScaffolderID>ApiControllerWithContextScaffolder</_SelectedScaffolderID>
+<<<<<<< HEAD
     <_SelectedScaffolderCategoryPath>root/Common/Api</_SelectedScaffolderCategoryPath>
+=======
+    <_SelectedScaffolderCategoryPath>root/Common</_SelectedScaffolderCategoryPath>
+>>>>>>> 0620a283b5ae61ae86dd366b52312c86a543a1a5
     <WebStackScaffolding_ControllerDialogWidth>600</WebStackScaffolding_ControllerDialogWidth>
     <WebStackScaffolding_IsLayoutPageSelected>True</WebStackScaffolding_IsLayoutPageSelected>
     <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
@@ -11,5 +15,8 @@
     <WebStackScaffolding_DbContextTypeFullName>Cinema.Areas.Admin.Data.DPContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <Area_SelectedScaffolderID>AreaScaffolder</Area_SelectedScaffolderID>
+    <Area_SelectedScaffolderCategoryPath>root/Common</Area_SelectedScaffolderCategoryPath>
+    <WebStackScaffolding_DependencyDialogWidth>600</WebStackScaffolding_DependencyDialogWidth>
   </PropertyGroup>
 </Project>
