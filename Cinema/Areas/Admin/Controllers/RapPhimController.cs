@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cinema.Areas.Admin.Data;
 using Cinema.Areas.Admin.Models;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Cinema.Areas.Admin.Controllers
 {
@@ -20,80 +23,148 @@ namespace Cinema.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/RapPhim
-        public async Task<IActionResult> Index()
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
-            var dPContext = _context.tb_RapPhim.Include(r => r.CumRap);
-            return View(await dPContext.ToListAsync());
+            if (Request.QueryString.Value.IndexOf("s_name") < 0)
+            {
+                ViewBag.lstRapPhim = (from l in _context.tb_RapPhim
+                                     where l.TrangThai == true
+                                     select l).ToList();
+            }
+            base.OnActionExecuted(context);
+        }
+
+        // GET: Admin/RapPhim
+        public async Task<IActionResult> Index(int? id, string? s_name)
+        {
+            RapPhimModel rapPhim = null;
+            ViewBag.lstCumRap = (from l in _context.tb_CumRap
+                                 select l).ToList();
+
+            ViewBag.lstCumRap_Active = (from l in _context.tb_CumRap
+                                        where l.TrangThai == true
+                                        select l).ToList();
+
+            if (id != null)
+            {
+                rapPhim = await _context.tb_RapPhim.FirstOrDefaultAsync(m => m.Id == id);
+            }
+            if (s_name != null)
+            {
+                ViewBag.lstRapPhim = (from p in _context.tb_RapPhim
+                                     where p.TenRap.IndexOf(s_name) >= 0
+                                     && p.TrangThai ==true
+                                    
+
+                                     select p).ToList();
+            }
+            else
+            {
+                ViewBag.lstRapPhim = (from p in _context.tb_RapPhim
+                                     where p.TrangThai == true 
+                                     
+                                      select p).ToList();
+            }
+            return View(rapPhim);
         }
 
         // GET: Admin/RapPhim/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var rapPhimModel = await _context.tb_RapPhim
-                .Include(r => r.CumRap)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (rapPhimModel == null)
-            {
-                return NotFound();
-            }
+        //    var rapPhimModel = await _context.tb_RapPhim
+        //        .Include(r => r.CumRap)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (rapPhimModel == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(rapPhimModel);
-        }
+        //    return View(rapPhimModel);
+        //}
 
         // GET: Admin/RapPhim/Create
-        public IActionResult Create()
-        {
-            ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum");
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum");
+        //    return View();
+        //}
 
         // POST: Admin/RapPhim/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel)
+        public async Task<IActionResult> Create([Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel, IFormFile ful)
         {
+            ViewBag.lstCumRap_Active = (from l in _context.tb_CumRap
+                                        where l.TrangThai==true
+                                 select l).ToList();
+            rapPhimModel.TrangThai = true;
+            rapPhimModel.HinhAnh = "noimg.jpg";
             if (ModelState.IsValid)
             {
-                _context.Add(rapPhimModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+               
+                if (ful != null)
+                {
+                    _context.Add(rapPhimModel);
+                    await _context.SaveChangesAsync();
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pic_cinema",
+                   rapPhimModel.Id + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    rapPhimModel.HinhAnh = rapPhimModel.Id + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                    _context.Update(rapPhimModel);
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "Thêm rạp " + rapPhimModel.TenRap + " thành công! ";
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    TempData["Success"] = "Thất bại!";
+                    return RedirectToAction(nameof(Index));
+
+                }
+
+               
+               
             }
             ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
-            return View(rapPhimModel);
+            return View("Index");
         }
 
         // GET: Admin/RapPhim/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var rapPhimModel = await _context.tb_RapPhim.FindAsync(id);
-            if (rapPhimModel == null)
-            {
-                return NotFound();
-            }
-            ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
-            return View(rapPhimModel);
-        }
+        //    var rapPhimModel = await _context.tb_RapPhim.FindAsync(id);
+        //    if (rapPhimModel == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);
+        //    return View(rapPhimModel);
+        //}
 
         // POST: Admin/RapPhim/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TenRap,DiaChi,HinhAnh,MaCumRap,TrangThai")] RapPhimModel rapPhimModel, IFormFile ful)
         {
+            
+            rapPhimModel.TrangThai = true;
             if (id != rapPhimModel.Id)
             {
                 return NotFound();
@@ -103,8 +174,26 @@ namespace Cinema.Areas.Admin.Controllers
             {
                 try
                 {
+                   
                     _context.Update(rapPhimModel);
+                    if (ful != null)//Neu chon hinh cu
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pic_cinema", rapPhimModel.HinhAnh);
+                        System.IO.File.Delete(path);//Xoa hinh cu
+                                                    //Them hinh moi
+                        path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pic_cinema",
+                 rapPhimModel.Id + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await ful.CopyToAsync(stream);
+                        }
+                        rapPhimModel.HinhAnh = rapPhimModel.Id + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                        _context.Update(rapPhimModel);
+                        
+
+                    }
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,6 +206,7 @@ namespace Cinema.Areas.Admin.Controllers
                         throw;
                     }
                 }
+                TempData["Success"] = "Chỉnh sửa rạp " + rapPhimModel.TenRap + " thành công! ";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MaCumRap"] = new SelectList(_context.tb_CumRap, "Id", "TenCum", rapPhimModel.MaCumRap);

@@ -15,34 +15,39 @@
             @await Html.PartialAsync("_SidebarPartial.cshtml")
             <div class="main-panel">
                 @RenderBody()
-<<<<<<< HEAD
-=======
+
 
             </div>
         </div>
-
-        <div class="modal" tabindex="-1" role="dialog" id="form-modal">
-            <div class="modal-dialog modal-lg" role="document">
+        <div class="modal fade" id="modal-tb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Tiêu đề chức năng</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title" id="modal-tb-title"></h5>
+                        <button type="button" class="close xRemove" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                    </div>
+                    <div class="modal-body" id="modal-tb-body">
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary xRemove" data-dismiss="modal">Thoát</button>
+                    </div>
                 </div>
->>>>>>> a93618663ad04386784ec38de2f51447886a3fba
             </div>
         </div>
-        
+
+       
+
     </div>
+
+
+
+    @await Html.PartialAsync("_FooterPartial.cshtml")
+    @await Html.PartialAsync("_ScriptPartial.cshtml")
    
-        @await Html.PartialAsync("_FooterPartial.cshtml")
-        @await Html.PartialAsync("_ScriptPartial.cshtml")
-        @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>
