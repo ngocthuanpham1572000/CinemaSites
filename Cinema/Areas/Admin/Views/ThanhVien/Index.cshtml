@@ -1,14 +1,47 @@
-﻿@model IEnumerable<Cinema.Areas.Admin.Models.ThanhVienModel>
+﻿@model Cinema.Areas.Admin.Models.ThanhVienModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@(ViewContext.RouteData.Values["id"] != null ? "Chỉnh sửa thành viên" : "Thêm mới thành viên")</h1>
+@{
+    if (ViewContext.RouteData.Values["id"] != null)
+    {
+        <p>
+            <a asp-action="Index" asp-route-id="">Thêm mới</a>
+        </p>
+    }
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="container-fluid mt-3">
+    <partial name="Create" />
+</div>
+<div class="container-fluid mt-3">
+    <form asp-action="Index" method="get">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="s_name" class="col-form-label">Nhập từ khóa</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="s_name" name="s_name" class="form-control" @(Context.Request.Query["s_name"] != "" ? ("value=" + Context.Request.Query["s_name"]) : null)>
+            </div>
+            <div class="col-auto">
+                <select class="form-select form-control" name="s_stt">
+                    <option value="" selected>Tất cả trạng thái</option>
+                    <option value="false">Ẩn</option>
+                    <option value="true">Hiện</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid mt-3">
+    <p>Có @(((ICollection<ThanhVienModel>)ViewBag.ListTV).Count)  thành viên</p>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -40,38 +73,111 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GioiTinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SDT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaiKhoan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MatKhau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (ThanhVienModel item in ViewBag.ListTV)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ten)
+                </td>
+                <td>
+                    <img src="~/template_admin/images/thanhvien/@Html.DisplayFor(modelItem => item.HinhAnh)" alt="Alternate Text" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Index" asp-route-id="@item.Id">Sửa</a> |
+                    <button class="btn btn-warning" name="btn_update_stt" data-id="@item.Id" data-stt="@(item.TrangThai == true ?0:1)"
+                            data-name="@item.Ten">
+                        @{
+                            if (item.TrangThai == true)
+                            {
+                                @:Ẩn
+                            }
+                            else
+                            {
+                                @:Hiện
+                            }
+                        }
+                    </button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function readURL(input, idImg) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(idImg).attr("src", e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#ful").change(function () {
+            readURL(this, "#imgPre");
+        })
+    </script>
+    <script>
+        $('button[name=btn_update_stt]').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                method: "DELETE",
+                url: "../api/ThanhVien_API/DeleteThanhVienModel/" + id
+            })
+                .done(function (reponse) {
+                    if (response = !null) {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Thành công'
+                        });
+                        $('#modal-tb').modal('show');
+                        $('#modal-tb').click(function (e) {
+                            if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                                location.reload();
+                            }
+                        });
+
+                    } else {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Thất bại'
+                        });
+                        $('#modal-tb').modal('show');
+                    }
+                });
+
+        })
+    </script>
+    <script>
+        function modalIntify({ title, messenge }) {
+            const modalTitle = document.getElementById('modal-tb-title');
+            const modalBody = document.getElementById('modal-tb-body');
+            modalTitle.textContent = title;
+            modalTitle.style.fontSize = '20px';
+            modalTitle.style.textAlign = 'center';
+            modalTitle.style.fontWeight = '400';
+            modalBody.textContent = messenge;
+            modalBody.style.textAlign = 'center';
+        }
+    </script>
+}

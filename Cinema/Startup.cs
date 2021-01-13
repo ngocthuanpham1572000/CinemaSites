@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cinema.Areas.Admin.Models;
 
 namespace Cinema
 {
@@ -27,6 +28,7 @@ namespace Cinema
         {
             services.AddControllersWithViews();
             services.AddDbContext<DPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DPContext")));
+            services.AddTransient<ThanhVienModel, ThanhVienModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +46,7 @@ namespace Cinema
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
 
             app.UseAuthorization();

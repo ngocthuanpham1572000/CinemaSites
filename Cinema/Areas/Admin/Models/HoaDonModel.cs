@@ -12,6 +12,8 @@ namespace Cinema.Areas.Admin.Models
         public int Id { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime NgayLap { get; set; }
 
         [Range(1000, 100000000000)]
