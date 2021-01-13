@@ -8821,19 +8821,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {}
+    "C:\\Users\\GAMING\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj",
+      "projectUniqueName": "E:\\HK5_ASP.NET\\CinemaSites\\Cinema\\Cinema.csproj",
       "projectName": "Cinema",
-      "projectPath": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\obj\\",
+      "projectPath": "E:\\HK5_ASP.NET\\CinemaSites\\Cinema\\Cinema.csproj",
+      "packagesPath": "C:\\Users\\GAMING\\.nuget\\packages\\",
+      "outputPath": "E:\\HK5_ASP.NET\\CinemaSites\\Cinema\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\GAMING\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8900,7 +8900,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

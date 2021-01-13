@@ -10,11 +10,9 @@ namespace Cinema.Areas.Admin.Models
     {
         [Key] public int Id { get; set; }
 
+        [Range(1, 20, ErrorMessage = "Can only 1 to 20")] 
         [Required] public int TenGhe { get; set; }
-
-      
-
-       
+        
         public bool TrangThai { get; set; }
         public int MaHangGhe { get; set; }
         [ForeignKey("MaHangGhe")] public HangGheModel Hang { get; set; }

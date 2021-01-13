@@ -1,19 +1,20 @@
 ﻿@model Cinema.Areas.Admin.Models.GheModel
 
-@{
-    ViewData["Title"] = "Create";
-}
 
-<h1>Create</h1>
-
-<h4>GheModel</h4>
+<h1>@(ViewContext.RouteData.Values["id"] != null ? "Edit" : "Create")</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form id="@(ViewContext.RouteData.Values["id"] != null ?"Edit":"Create")" asp-action="@(ViewContext.RouteData.Values["id"] != null ?"Edit":"Create")" asp-route-id="@(ViewContext.RouteData.Values["id"] != null ?ViewContext.RouteData.Values["id"]:"")">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @{
+                if (ViewContext.RouteData.Values["id"] != null)
+                {
+                    <input type="hidden" asp-for="Id" />
+                }
+            }
             <div class="form-group">
-                <label asp-for="TenGhe" class="control-label"></label>
+                <label asp-for="TenGhe" class="control-label">Tên Ghế</label>
                 <input asp-for="TenGhe" class="form-control" />
                 <span asp-validation-for="TenGhe" class="text-danger"></span>
             </div>
@@ -23,19 +24,16 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="MaHangGhe" class="control-label"></label>
-                <select asp-for="MaHangGhe" class ="form-control" asp-items="ViewBag.MaHangGhe"></select>
+                <label asp-for="MaHangGhe" class="control-label"> Hàng Ghế</label>
+                <select asp-for="MaHangGhe" class="form-control" asp-items="@( new SelectList(ViewBag.ListHangGhe,"Id","TenHang"))"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" data-sucess="@(ViewContext.RouteData.Values["id"] != null ?"edit_ghe":"create_ghe")" value="@(ViewContext.RouteData.Values["id"] != null ?"Edit":"Create")" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

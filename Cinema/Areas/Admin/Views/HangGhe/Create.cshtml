@@ -4,14 +4,19 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>HangGheModel</h4>
+<h4>@(ViewContext.RouteData.Values["id"] != null ?"Chỉnh sửa":"Thêm mới")</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form id="@(ViewContext.RouteData.Values["id"] != null ?"Edit":"Create")" asp-action="@(ViewContext.RouteData.Values["id"] != null ?"Edit":"Create")" asp-route-id="@(ViewContext.RouteData.Values["id"] != null ?ViewContext.RouteData.Values["id"]:"")">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @{
+                if (ViewContext.RouteData.Values["id"] != null)
+                {
+                    <input type="hidden" asp-for="Id" />
+                }
+            }
             <div class="form-group">
                 <label asp-for="TenHang" class="control-label"></label>
                 <input asp-for="TenHang" class="form-control" />
@@ -19,23 +24,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="MaPhong" class="control-label"></label>
-                <select asp-for="MaPhong" class ="form-control" asp-items="ViewBag.MaPhong"></select>
+                <select asp-for="MaPhong" class="form-control" asp-items="@(new SelectList(ViewBag.ListPhong,"Id","TenPhong"))"></select>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
-                </label>
-            </div>
+            
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                    </label>
+                </div>
+             </div>
+            <div class="form-group">
+                <input type="submit" data-sucess="@(ViewContext.RouteData.Values["id"] != null ?"edit_hang":"create_hang")" value="@(ViewContext.RouteData.Values["id"] != null ?"Edit":"Create")" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -11,11 +11,11 @@ using Cinema.Areas.Admin.Models;
 namespace Cinema.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class Phongontroller : Controller
+    public class PhongController : Controller
     {
         private readonly DPContext _context;
 
-        public Phongontroller(DPContext context)
+        public PhongController(DPContext context)
         {
             _context = context;
         }

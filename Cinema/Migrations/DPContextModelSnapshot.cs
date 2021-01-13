@@ -250,7 +250,6 @@ namespace Cinema.Migrations
                         .HasMaxLength(200);
 
                     b.Property<string>("HinhAnh")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MaCumRap")

@@ -1,47 +1,168 @@
-﻿@model IEnumerable<Cinema.Areas.Admin.Models.HangGheModel>
+﻿@model Cinema.Areas.Admin.Models.HangGheModel
 
-@{
-    ViewData["Title"] = "Index";
-}
 
 <h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenHang)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrangThai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phong)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenHang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phong.TenPhong)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@{
+    if (ViewContext.RouteData.Values["id"] != null)
+    {
+        <p><a asp-action="Index" asp-route-id="">Create New</a></p>
+    }
 }
-    </tbody>
-</table>
+
+<partial name="Create">
+    <hr />
+    <form class="container" asp-action="Index" method="get">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" id="s_name" name="s_name" placeholder="Nhập hàng ghế..." @(Context.Request.Query["s_name"]!=""?("value="+Context.Request.Query["s_name"]):null)  >
+            </div>
+            <div class="col-md-1">
+                <button type="submit">Tìm</button>
+            </div>
+        </div>
+    </form>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Tên Hàng
+                </th>
+                <th>
+                    Trạng Thái
+                </th>
+                <th>
+                    Tên Phòng
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (HangGheModel item in ViewBag.ListHangGhe)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenHang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrangThai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phong.TenPhong)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Index" asp-route-id="@item.Id">Chỉnh sửa</a>
+                        <button class="btn btn-warning" name="btn_update_stt" data-id="@item.Id">
+                            @{
+                                if (item.TrangThai == true)
+                                {
+                                    @:Khóa
+                                }
+                                else
+                                {
+                                    @:Kích hoạt
+                                }
+                            }
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            $('button[name=btn_update_stt]').click(function () {
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    method: "DELETE",
+                    url: "../../API/HangGhe_API/DeleteHangGheModel/" + id
+                })
+                    .done(function (msg) {
+                        alert("Đã thay đổi trạng thái hàng " + msg.tenHang);
+                        location.reload();
+                    });
+            })
+        </script>
+        <script>
+            $('input[data-sucess="create_hang"]').click(function (e) {
+                e.preventDefault();
+                const post_url = $("#Create").attr("action");
+                const request_method = $("#Create").attr("method");
+                const form_data = $("#Create").serialize();
+                $.ajax({
+                    url: post_url,
+                    type: request_method,
+                    data: form_data
+                }).done(function (response) {
+                    if (response) {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Thêm hàng ghế thành công'
+                        });
+                        $('#modal-tb').modal('show');
+                        $('#modal-tb').click(function (e) {
+                            if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                                location.reload();
+                            }
+                        });
+
+                    } else {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Thêm hàng ghế thất bại'
+                        });
+                        $('#modal-tb').modal('show');
+                    }
+                });
+            });
+        </script>
+
+
+        <script>
+            $('input[data-sucess="edit_hang"]').click(function (e) {
+                e.preventDefault();
+                const post_url = $("#Edit").attr("action");
+                const request_method = $("#Edit").attr("method");
+                const form_data = $("#Edit").serialize();
+                $.ajax({
+                    url: post_url,
+                    type: request_method,
+                    data: form_data
+                }).done(function (response) {
+                    if (response) {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Sửa hàng ghế thành công'
+                        });
+                        $('#modal-tb').modal('show');
+                        $('#modal-tb').click(function (e) {
+                            if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                                location.reload();
+                            }
+                        });
+
+                    } else {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Sửa hàng ghế thất bại'
+                        });
+                        $('#modal-tb').modal('show');
+                    }
+                });
+            });
+        </script>
+        <script>
+            function modalIntify({ title, messenge }) {
+                const modalTitle = document.getElementById('modal-tb-title');
+                const modalBody = document.getElementById('modal-tb-body');
+                modalTitle.textContent = title;
+                modalTitle.style.fontSize = '20px';
+                modalTitle.style.textAlign = 'center';
+                modalTitle.style.fontWeight = '400';
+                modalBody.textContent = messenge;
+                modalBody.style.textAlign = 'center';
+            }
+        </script>
+    }
