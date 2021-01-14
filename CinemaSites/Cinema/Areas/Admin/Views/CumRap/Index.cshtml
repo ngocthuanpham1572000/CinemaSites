@@ -1,0 +1,208 @@
+﻿@model Cinema.Areas.Admin.Models.CumRapModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content-wrapper">
+
+    <partial name="Create" />
+    
+
+    
+    <div class="row">
+        <div class="col-md-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    @if (ViewContext.RouteData.Values["id"] != null)
+                    {
+                        <a class="btn btn-primary" asp-action="Index" asp-route-id="">Tạo cụm rạp mới</a>
+
+                    }
+                    <br />
+                    <br />
+                    
+
+                    <p class="card-title">Tìm kiếm</p>
+                    <form asp-action="Index" method="get">
+                        <div class="col-md-12">
+                            <label for="s_name" class="col-form-label">Nhập từ khoá</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" name="s_name" class="form-control"
+                                       @(Context.Request.Query["s_name"] != "" ? ("value=" + Context.Request.Query["s_name"]) : null)>
+                            </div>
+
+                            <div class="col-md-4">
+                                <button class="btn btn-info" type="submit">Tìm</button>
+                            </div>
+
+                        </div>
+                        <br />
+                        <p>Có @(((ICollection<CumRapModel>)ViewBag.lstCumRap).Count) cụm rạp</p>
+
+                    </form>
+                    <br />
+                    <br />
+
+                    <p class="card-title">Danh sách cụm rạp</p>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tên cụm
+                                </th>
+                                <th hidden>
+                                    Trạng thái
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.lstCumRap)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.TenCum
+                                    </td>
+                                    <td hidden>
+                                        @item.TrangThai
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" asp-route-id="@item.Id">Sửa</a>
+
+                                        <button name="delete" type="submit" class="btn btn-warning" data-id="@item.Id">Xoá</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  
+    <script>
+        $('button[name=delete]').click(function (e) {
+            e.preventDefault();
+            var id = $(this).attr('data-id');
+            console.log(id);
+            const post_url = "../../../api/CumRapAPI/" + id;
+            const request_method = "DELETE";
+            $.ajax({
+                url: post_url,
+                type: request_method
+            }).done(function (response) {
+                if (response) {
+                    modalIntify({
+                        title: 'THÀNH CÔNG',
+                        messenge: 'Xóa cụm rạp  ' + response.tenCum + '  thành công!'
+                    });
+                    $('#modal-tb').modal('show');
+                    $('#modal-tb').click(function (e) {
+                        if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    modalIntify({
+                        title: 'THẤT BẠI',
+                        messenge: 'Xóa cụm rạp thất bại!'
+                    });
+                    $('#modal-tb').modal('show');
+                }
+            });
+        });
+    </script>
+
+
+
+    <script>
+        $('#create-cumrap').submit(function (e) {
+            e.preventDefault();
+            const post_url = $(this).attr("action");
+            const request_method = $(this).attr("method");
+            const form_data = $(this).serialize();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                if (response) {
+                    modalIntify({
+                        title: 'Thông báo',
+                        messenge: 'Thêm cụm rạp thành công!'
+                    });
+                    $('#modal-tb').modal('show');
+                    $('#modal-tb').click(function (e) {
+                        if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    modalIntify({
+                        title: 'Thông báo',
+                        messenge: 'Thêm cụm rạp thất bại!'
+                    });
+                    $('#modal-tb').modal('show');
+                }
+            });
+        });
+    </script>
+
+   
+
+    <script>
+        $('#edit-cumrap').submit(function (e) {
+            e.preventDefault();
+            const post_url = $(this).attr("action");
+            const request_method = $(this).attr("method");
+            const form_data = $(this).serialize();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                if (response) {
+                    modalIntify({
+                        title: 'Thông báo',
+                        messenge: 'Chỉnh sửa cụm rạp thành công'
+                    });
+                    $('#modal-tb').modal('show');
+                    $('#modal-tb').click(function (e) {
+                        if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                            location.replace('../../../Admin/CumRap/Index');
+
+                        }
+                    });
+
+                } else {
+                    modalIntify({
+                        title: 'Thông báo',
+                        messenge: 'Chỉnh sửa cụm rạp thất bại'
+                    });
+                    $('#modal-tb').modal('show');
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+}
+
+

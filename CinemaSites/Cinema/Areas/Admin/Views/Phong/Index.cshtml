@@ -1,0 +1,208 @@
+@model Cinema.Areas.Admin.Models.PhongModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    if (ViewContext.RouteData.Values["id"] != null)
+    {
+        <p>
+            <a asp-action="Index" asp-route-id="">Create New</a>
+        </p>
+    }
+}
+
+<div class="container-fluid mt-3">
+    <partial name="Create" />
+</div>
+<div class="container-fluid mt-3">
+    <form asp-action="Index" method="get">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="s_name" class="col-form-label">Nhập từ khóa</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" id="s_name_ph" name="s_name_ph" class="form-control" @(Context.Request.Query["s_name_ph"] != "" ? ("value=" + Context.Request.Query["s_name_ph"]) : null)>
+            </div>
+            <div class="col-auto">
+                <select class="form-select form-control" name="s_stt">
+                    <option value="" selected>Tất cả</option>
+                    <option value="false">Ẩn</option>
+                    <option value="true">Hiện</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid mt-3">
+    <p>Có @(((ICollection<PhongModel>)ViewBag.ListPh).Count)  phòng</p>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên phòng
+            </th>
+            <th>
+                Tên rạp
+            </th>
+            <th>
+                Trạng thái
+
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (PhongModel item in ViewBag.ListPh)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenPhong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rap.TenRap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Index" asp-route-id="@item.Id">Sửa</a> |
+
+                    <button class="btn btn-warning" name="btn_update_stt" data-id="@item.Id" data-stt="@(item.TrangThai == true ?0:1)">
+                        @{
+                            if (item.TrangThai == true)
+                            {
+                                @:Ẩn
+                            }
+                            else
+                            {
+                                @:Hiện
+                            }
+                        }
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('input[data-sucess="create_ph"]').click(function (e) {
+
+            e.preventDefault();
+            const post_url = $("#create").attr("action");
+            const request_method = $("#create").attr("method");
+            const form_data = $("#create").serialize();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                if (response) {
+                    modalIntify({
+                        title: 'THÀNH CÔNG',
+                        messenge: 'Thêm phòng thành công'
+                    });
+                    $('#modal-tb').modal('show');
+                    $('#modal-tb').click(function (e) {
+                        if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    modalIntify({
+                        title: 'THẤT BẠI',
+                        messenge: 'Thêm phòng thất bại'
+                    });
+                    $('#modal-tb').modal('show');
+                }
+            });
+        });
+    </script>
+    <script>
+        $('input[data-sucess="edit_ph"]').click(function (e) {
+
+            e.preventDefault();
+            const post_url = $("#edit").attr("action");
+            const request_method = $("#edit").attr("method");
+            const form_data = $("#edit").serialize();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                if (response) {
+                    modalIntify({
+                        title: 'THÀNH CÔNG',
+                        messenge: 'Sửa thông tin phòng thành công'
+                    });
+                    $('#modal-tb').modal('show');
+                    $('#modal-tb').click(function (e) {
+                        if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    modalIntify({
+                        title: 'THẤT BẠI',
+                        messenge: 'Sửa thông tin phòng thất bại'
+                    });
+                    $('#modal-tb').modal('show');
+                }
+            });
+        });
+    </script>
+    <script>
+        $('button[name=btn_update_stt]').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                method: "DELETE",
+                url: "../api/Phong_API/DeletePhongModel/" + id
+            })
+                .done(function (reponse) {
+                    if (response = !null) {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Thành công'
+                        });
+                        $('#modal-tb').modal('show');
+                        $('#modal-tb').click(function (e) {
+                            if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                                location.reload();
+                            }
+                        });
+
+                    } else {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Thất bại'
+                        });
+                        $('#modal-tb').modal('show');
+                    }
+                });
+
+        })
+    </script>
+    <script>
+        function modalIntify({ title, messenge }) {
+            const modalTitle = document.getElementById('modal-tb-title');
+            const modalBody = document.getElementById('modal-tb-body');
+            modalTitle.textContent = title;
+            modalTitle.style.fontSize = '20px';
+            modalTitle.style.textAlign = 'center';
+            modalTitle.style.fontWeight = '400';
+            modalBody.textContent = messenge;
+            modalBody.style.textAlign = 'center';
+        }
+    </script>
+}

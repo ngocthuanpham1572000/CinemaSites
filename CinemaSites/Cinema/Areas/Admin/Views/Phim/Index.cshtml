@@ -1,0 +1,275 @@
+﻿@model IEnumerable<Cinema.Areas.Admin.Models.PhimModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h1>Index</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenPhim)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThoiLuong)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DaoDien)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DienVien)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuocGia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mota)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HinhAnh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Trailer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayPhatHanh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Loai)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrangThai)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenPhim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiLuong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DaoDien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DienVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuocGia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mota)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HinhAnh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Trailer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayPhatHanh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Loai.TenLoai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrangThai)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2 style="display:inline">Phim</h2>
+                   @* <a data-toggle="modal" data-target="#modal-update" href="" class="btn btn-success " style="position:absolute; right:10px;">Cập nhật trạng thái</a>*@
+                    <br />
+
+                    <p class="card-description">
+                        Danh sách các phim
+                    </p>
+                    <p>
+                        <a class="btn btn-primary" onclick="showModal('@Url.Action("Create","Phim",null,Context.Request.Scheme)','Thêm phim mới')">Tạo phim mới</a>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Tên phim
+                                    </th>
+                                    <th>
+                                        Thời lượng
+                                    </th>
+                                    <th>
+                                        Đạo diễn
+                                    </th>
+                                    <th>
+                                        Diễn viên
+                                    </th>
+                                    <th>
+                                        Quốc gia
+                                    </th>
+                                    <th>
+                                        Mô tả
+                                    </th>
+                                    <th>
+                                        Hình ảnh
+                                    </th>
+                                    <th>
+                                        Trailer
+                                    </th>
+                                    <th>
+                                        Ngày phát hành
+                                    </th>
+                                    <th>
+                                        Thể loại
+                                    </th>
+                                    <th>
+                                        Trạng thái
+                                    </th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TenPhim)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ThoiLuong)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DaoDien)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DienVien)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.QuocGia)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Mota)
+                                        </td>
+                                        <td>
+                                            <img src="~/template_admin/images/Phim/@Html.DisplayFor(modelItem => item.HinhAnh)" alt="Alternate Text" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Trailer)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NgayPhatHanh)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MaLoai)
+                                        </td>
+                                        <td>
+                                            @if (item.TrangThai == 1)
+                                            {
+                                                @*@Html.DisplayFor(modelItem => "Đang chiếu")*@
+                                                <span>Đang chiếu</span>
+                                            }
+                                            @if (item.TrangThai == 2)
+                                            {
+                                                <span>Sắp chiếu</span>
+                                                @*@Html.DisplayFor(modelItem => "Sắp chiếu")*@
+                                            }
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success" onclick="showModal('@Url.Action("Edit","Phim",new {id = item.Id },Context.Request.Scheme)','Chỉnh sửa phim')">Edit</a>
+
+                                        <td>
+
+                                            <a class="btn btn-info" onclick="showModal('@Url.Action("Details","Phim",new {id = item.Id },Context.Request.Scheme)','Chi tiết phim')">Details</a>
+
+                                        </td>
+                                        <td>
+
+                                            <a class="btn btn-danger" onclick="showModal('@Url.Action("Delete","Phim",new {id = item.Id },Context.Request.Scheme)','Xóa phim')">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="modal-update">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cập nhật trang thái</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có muốn cập nhật trạng thái phim?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button"><a class="btn btn-primary" asp-controller="Phim" asp-action="UpdateTrangThai">Cập nhật</a></button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        showModal = (url, title) => {
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (res) {
+
+                    $('#form-modal .modal-body').html(res);
+
+                    $('#form-modal .modal-title').html(title);
+
+                    $('#form-modal').modal('show');
+                }
+            })
+        };
+        function readURL(input, idIMG) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(idIMG).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#ful").change(function () { readURL(this, '#imgPre'); }
+        );
+    </script>
+
+}
+

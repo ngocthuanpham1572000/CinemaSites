@@ -1,0 +1,131 @@
+﻿@model Cinema.Areas.Admin.Models.LoaiPhimModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="Create" />
+<p>
+    <a asp-action="Index" class="btn btn-success" asp-route-id="">Làm mới</a>
+</p>
+<div class="container-fluid mt-3">
+    <form asp-action="Index" method="get">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <label for="str" class="col-form-label">Nhập từ khóa</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" name="str" id="str" class="form-control" @(Context.Request.Query["str"] != "" ? ("value=" + Context.Request.Query["str"]) : null) >
+            </div>
+            
+            <div class="col-auto">
+                <button class="btn btn-primary" type="submit">Tìm</button>
+            </div>
+        </div>
+        <div class="container-fluid mt-3">
+            <h4>Có @(((ICollection<LoaiPhimModel>)ViewBag.ListLoaiPhim).Count) loại phim</h4>
+        </div>
+    </form>
+   
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenLoai)
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.ListLoaiPhim)
+        {
+            <tr>
+                <td>
+                    @item.TenLoai
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" asp-action="Index" asp-route-id="@item.Id">Edit</a> |
+
+                    <a onclick="showModalAcount('@Url.Action("Delete","LoaiPhim",new { id = $"{item.Id}"},Context.Request.Scheme)','Xóa loại phim')" class="btn btn-pinterest text-white">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('input[data-sucess="create-loaiphim"]').click(function (e) {
+
+            e.preventDefault();
+            const post_url = $("#create-loaiphim").attr("action");
+            const request_method = $("#create-loaiphim").attr("method");
+            const form_data = $("#create-loaiphim").serialize();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                if (response) {
+                    modalIntify({
+                        title: 'THÀNH CÔNG',
+                        messenge: 'Thêm loại phim thành công'
+                    });
+                    $('#modal-tb').modal('show');
+                    $('#modal-tb').click(function (e) {
+                        if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    modalIntify({
+                        title: 'THẤT BẠI',
+                        messenge: 'Thêm loại phim thất bại'
+                    });
+                    $('#modal-tb').modal('show');
+                }
+            });
+        });
+    </script>
+    <script>
+        $('input[data-sucess="edit-loaiphim"]').click(function (e) {
+
+            e.preventDefault();
+            const post_url = $("#edit-loaiphim").attr("action");
+            const request_method = $("#edit-loaiphim").attr("method");
+            const form_data = $("#edit-loaiphim").serialize();
+            $.ajax({
+                url: post_url,
+                type: request_method,
+                data: form_data
+            }).done(function (response) {
+                if (response) {
+                    modalIntify({
+                        title: 'THÀNH CÔNG',
+                        messenge: 'Sửa loại phim thành công'
+                    });
+                    $('#modal-tb').modal('show');
+                    $('#modal-tb').click(function (e) {
+                        if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                            location.reload();
+                        }
+                    });
+
+                } else {
+                    modalIntify({
+                        title: 'THẤT BẠI',
+                        messenge: 'Sửa loại phim thất bại'
+                    });
+                    $('#modal-tb').modal('show');
+                }
+            });
+        });
+    </script>
+}

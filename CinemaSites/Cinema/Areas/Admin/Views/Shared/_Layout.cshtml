@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    @await Html.PartialAsync("_HeadPartial.cshtml")
+    @RenderSection("css", required: false)
+    
+
+</head>
+<body>
+    <div class="container-scroller">
+        @await Html.PartialAsync("_NavbarPartial.cshtml")
+        <div class="container-fluid page-body-wrapper">
+            @await Html.PartialAsync("_SidebarPartial.cshtml")
+            <div class="main-panel">
+                @RenderBody()
+
+            </div>
+        </div>
+        <div class="modal fade" id="modal-tb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-tb-title"></h5>
+                        <button type="button" class="close xRemove" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modal-tb-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary xRemove" data-dismiss="modal">Thoát</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tiêu đề chức năng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    @await Html.PartialAsync("_FooterPartial.cshtml")
+    @await Html.PartialAsync("_ScriptPartial.cshtml")
+
+    @RenderSection("Scripts", required: false)
+    <script>
+        function modalIntify({ title, messenge }) {
+            const modalTitle = document.getElementById('modal-tb-title');
+            const modalBody = document.getElementById('modal-tb-body');
+            modalTitle.textContent = title;
+            modalTitle.style.fontSize = '20px';
+            modalTitle.style.textAlign = 'center';
+            modalTitle.style.fontWeight = '400';
+            modalBody.textContent = messenge;
+            modalBody.style.textAlign = 'center';
+        }
+    </script>
+
+</body>
+</html>

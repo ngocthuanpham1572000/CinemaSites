@@ -1,0 +1,57 @@
+﻿@model Cinema.Areas.Admin.Models.LoaiPhimModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = null;
+
+}
+@using (Html.BeginForm("Delete", "LoaiPhim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ }
+<div>
+    <h1>Bạn có chắc chắn muốn xóa</h1>
+
+
+    <form asp-action="Delete" id="delete-loaiphim">
+        <input type="hidden" asp-for="Id" />
+        <input data-sucess="delete-loaiphim" type="submit" value="Delete" class="btn btn-danger" />
+      
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $('input[data-sucess="delete-loaiphim"]').click(function (e) {
+
+        e.preventDefault();
+        var id = $('#Id').val();
+        console.log(id);
+        const post_url = "../../../api/LoaiPhim_API/" + id;
+        const request_method = "DELETE";
+        $.ajax({
+            url: post_url,
+            type: request_method
+        }).done(function (response) {
+            if (response) {
+                modalIntify({
+                    title: 'THÀNH CÔNG',
+                    messenge: 'Xóa loại phim { ' + response+' } thành công'
+                });
+                $('#modal-tb').modal('show');
+                $('#modal-tb').click(function (e) {
+                    if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                        location.reload();
+                    }
+                });
+
+            } else {
+                modalIntify({
+                    title: 'THẤT BẠI',
+                    messenge: 'Xóa loại phim thất bại'
+                });
+                $('#modal-tb').modal('show');
+            }
+        });
+    });
+</script>
+}
+
