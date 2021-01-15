@@ -91,15 +91,20 @@ namespace Cinema.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<bool> Create([Bind("Id,TenGhe,TrangThai,MaHangGhe")] GheModel gheModel)
+        public async Task<IActionResult> Create(int soluong, int idphong)
         {
-            if (ModelState.IsValid)
+            ViewBag.ListHangGhe = _context.tb_Phong.Where(m => m.TrangThai == true).ToList();
+            for (int i = 1; i <= soluong; i++)
             {
-                _context.Add(gheModel);
-                await _context.SaveChangesAsync();
-                return true;
+                GheModel ghe = new GheModel();
+                ghe.TenGhe = i;
+                ghe.MaHangGhe = idphong;
+                ghe.TrangThai = true;
+                _context.Add(ghe);
             }
-            return false;
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Ghe");
         }
 
         // GET: Admin/Ghe/Edit/5

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj": {}
+    "E:\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj": {}
   },
   "projects": {
-    "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj": {
+    "E:\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj",
+        "projectUniqueName": "E:\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj",
         "projectName": "Cinema",
-        "projectPath": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\obj\\",
+        "projectPath": "E:\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj",
+        "packagesPath": "C:\\Users\\GAMING\\.nuget\\packages\\",
+        "outputPath": "E:\\CinemaSites\\CinemaSites\\Cinema\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\GAMING\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -43,6 +43,18 @@
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
               "version": "[4.0.40804, )"
+            },
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Core": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Facebook": {
+              "target": "Package",
+              "version": "[3.1.10, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -85,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

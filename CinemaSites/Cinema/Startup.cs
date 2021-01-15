@@ -29,6 +29,12 @@ namespace Cinema
             services.AddControllersWithViews();
             services.AddDbContext<DPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DPContext")));
             services.AddDistributedMemoryCache();
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "154618216233400";
+                options.AppSecret = "6f46ffd9fb7ee63f5b79cd698c97f824";
+            });
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(100);
