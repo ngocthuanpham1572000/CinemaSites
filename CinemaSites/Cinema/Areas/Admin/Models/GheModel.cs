@@ -10,11 +10,8 @@ namespace Cinema.Areas.Admin.Models
     {
         [Key] public int Id { get; set; }
 
-        [Required] public int TenGhe { get; set; }
+        [Required] [Range(1,12, ErrorMessage ="Row has only 1 to 12 seats")] public int TenGhe { get; set; }
 
-      
-
-       
         public bool TrangThai { get; set; }
         public int MaHangGhe { get; set; }
         [ForeignKey("MaHangGhe")] public HangGheModel Hang { get; set; }

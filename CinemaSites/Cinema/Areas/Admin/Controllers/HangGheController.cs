@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cinema.Areas.Admin.Data;
 using Cinema.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Data.SqlClient;
 
 namespace Cinema.Areas.Admin.Controllers
 {
@@ -87,17 +88,25 @@ namespace Cinema.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TenHang,MaPhong,TrangThai")] HangGheModel hangGheModel)
+        public async Task<IActionResult> Create( int soluong, int idphong)
         {
-            ViewBag.ListPhong = _context.tb_Phong.Where(m => m.TrangThai == true).ToList();
 
-            if (ModelState.IsValid)
+            ViewBag.ListPhong = _context.tb_Phong.Where(m => m.TrangThai == true).ToList();
+            char[] ch = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O' };
+            for(int i=0; i< soluong; i++)
             {
-                _context.Add(hangGheModel);
-                await _context.SaveChangesAsync();
+                HangGheModel hg = new HangGheModel();
+                hg.TenHang = ch[i].ToString();
+                hg.MaPhong = idphong;
+                hg.TrangThai = true;
+                _context.Add(hg);
             }
-            return RedirectToAction("Index", "HangGhe");
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Ghe");
         }
+
+        public SqlConnection con = new SqlConnection("Data Source=DESKTOP-NLCHEEG\\SQLEXPRESS;Initial Catalog=db_RapPhim;Integrated Security=True");
 
         // GET: Admin/HangGhe/Edit/5
         //public async Task<IActionResult> Edit(int? id)
@@ -118,11 +127,12 @@ namespace Cinema.Areas.Admin.Controllers
 
         // POST: Admin/HangGhe/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598. 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TenHang,MaPhong,TrangThai")] HangGheModel hangGheModel)
         {
+
             ViewBag.ListPhong = _context.tb_Phong.Where(m => m.TrangThai == true).ToList();
 
             if (id != hangGheModel.Id)
@@ -132,7 +142,7 @@ namespace Cinema.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                try 
                 {
                     _context.Update(hangGheModel);
                     await _context.SaveChangesAsync();

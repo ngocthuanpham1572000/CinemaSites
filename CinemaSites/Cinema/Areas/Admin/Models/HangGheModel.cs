@@ -12,9 +12,8 @@ namespace Cinema.Areas.Admin.Models
     {
        
         public int Id { get; set; }
-        [Required]
-        [StringLength(1)]
 
+        [Required]
         public string TenHang { get; set; }
 
         [Required]

@@ -187,6 +187,7 @@ namespace Cinema.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool PhongModelExists(int id)
         {
             return _context.tb_Phong.Any(e => e.Id == id);
