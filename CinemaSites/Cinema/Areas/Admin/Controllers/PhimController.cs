@@ -25,7 +25,7 @@ namespace Cinema.Areas.Admin.Controllers
         // GET: Admin/Phim
         public async Task<IActionResult> Index()
         {
-            UpdateTrangThai();
+            //UpdateTrangThai();
             var Phim = from m in _context.tb_Phim.Include(p => p.Loai)
                        select m;
             Phim = Phim.Where(x => x.TrangThai != 0);
@@ -101,7 +101,7 @@ namespace Cinema.Areas.Admin.Controllers
         }
 
         // GET: Admin/Phim/Edit/5
-        public void UpdateTrangThai()
+        public async void UpdateTrangThai()
         {
 
             var Phim = from m in _context.tb_Phim.Include(p => p.Loai)
@@ -113,7 +113,7 @@ namespace Cinema.Areas.Admin.Controllers
                 {
                     item.TrangThai = 1;
                     _context.Update(item);
-
+                    await _context.SaveChangesAsync();
                 }
             }
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yipycjUylm+vMertj7MkEVOOrY9V+tIzT6f4piuc5wfL8Dum367FzjsYHx5lA7dkcsQnxsdj2bOZz1zaz+Yvww==",
+  "dgSpecHash": "8BvUhU5xsPGVJWla1uyvJ2U2tVD9FlFasM/RqluEFnsB9+omV9a0hOlyQYChmLaR5AFNZl8v9ubPmxid/pE2AQ==",
   "success": true,
-  "projectFilePath": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj",
+  "projectFilePath": "D:\\ASP\\cinema\\CinemaSites\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnet.mvc\\4.0.40804\\microsoft.aspnet.mvc.4.0.40804.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\microsoft.aspnet.razor\\2.0.20710\\microsoft.aspnet.razor.2.0.20710.nupkg.sha512",

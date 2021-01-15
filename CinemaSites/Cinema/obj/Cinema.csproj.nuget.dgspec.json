@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj": {}
+    "D:\\ASP\\cinema\\CinemaSites\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj": {}
   },
   "projects": {
-    "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj": {
+    "D:\\ASP\\cinema\\CinemaSites\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj",
+        "projectUniqueName": "D:\\ASP\\cinema\\CinemaSites\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj",
         "projectName": "Cinema",
-        "projectPath": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\Cinema.csproj",
+        "projectPath": "D:\\ASP\\cinema\\CinemaSites\\CinemaSites\\CinemaSites\\Cinema\\Cinema.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP\\cinema\\CinemaSites\\Cinema\\obj\\",
+        "outputPath": "D:\\ASP\\cinema\\CinemaSites\\CinemaSites\\CinemaSites\\Cinema\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",

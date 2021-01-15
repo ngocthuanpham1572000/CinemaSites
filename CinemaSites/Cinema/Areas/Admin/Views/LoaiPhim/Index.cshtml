@@ -4,7 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<partial name="Create" />
+<div class="container-fluid mt-3">
+    <partial name="Create" />
+</div>
 <p>
     <a asp-action="Index" class="btn btn-success" asp-route-id="">Làm mới</a>
 </p>
@@ -40,7 +42,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.ListLoaiPhim)
+        @foreach (LoaiPhimModel item in ViewBag.ListLoaiPhim)
         {
             <tr>
                 <td>
@@ -48,11 +50,8 @@
                 </td>
 
                 <td>
-                    <a class="btn btn-primary" asp-action="Index" asp-route-id="@item.Id">Edit</a> |
-
-                    <a onclick="showModalAcount('@Url.Action("Delete","LoaiPhim",new { id = $"{item.Id}"},Context.Request.Scheme)','Xóa loại phim')" class="btn btn-pinterest text-white">
-                        Delete
-                    </a>
+                    <a class="btn btn-primary" asp-action="Index" asp-route-id="@item.Id">Edit</a>
+                    <button name="delete_loai" class="btn btn-warning" data-id="@item.Id">Xóa</button>
                 </td>
             </tr>
         }
@@ -127,5 +126,36 @@
                 }
             });
         });
+    </script>
+    <script>
+        $('button[name=delete_loai]').click(function () {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                method: "DELETE",
+                url: "../../../api/LoaiPhim_API/DeleteLoaiPhimModel/" + id,
+            })
+                .done(function (reponse) {
+                    if (response = !null) {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Xóa thành công'
+                        });
+                        $('#modal-tb').modal('show');
+                        $('#modal-tb').click(function (e) {
+                            if (e.target.closest('#modal-tb') || e.target.closest('xRemove')) {
+                                location.reload();
+                            }
+                        });
+
+                    } else {
+                        modalIntify({
+                            title: 'Thông báo',
+                            messenge: 'Xóa thất bại'
+                        });
+                        $('#modal-tb').modal('show');
+                    }
+                });
+
+        })
     </script>
 }

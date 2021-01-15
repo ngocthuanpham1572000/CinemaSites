@@ -167,7 +167,7 @@
             var id = $(this).attr('data-id');
             $.ajax({
                 method: "DELETE",
-                url: "../api/Phong_API/DeletePhongModel/" + id
+                url: "../../../api/Phong_API/DeletePhongModel/" + id
             })
                 .done(function (reponse) {
                     if (response = !null) {

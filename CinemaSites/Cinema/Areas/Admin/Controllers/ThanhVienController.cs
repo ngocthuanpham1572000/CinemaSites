@@ -151,17 +151,7 @@ namespace Cinema.Areas.Admin.Controllers
             {
                 try
                 {
-                    var matkhauMD5 = from mk in _context.tb_ThanhVien
-                                               where mk.Id == id
-                                                select mk.MatKhau;
-                    if (matkhau.Equals(matkhauMD5.ToString()))
-                    {
-                        thanhVienModel.MatKhau = matkhauMD5.ToString();
-                    }
-                    else
-                    {
-                        thanhVienModel.MatKhau = StringProcessing.CreateMD5Hash(matkhau);
-                    }
+                   
                     _context.Update(thanhVienModel);
                     if (ful != null)
                     {

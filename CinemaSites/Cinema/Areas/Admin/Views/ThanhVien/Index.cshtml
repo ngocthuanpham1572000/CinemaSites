@@ -142,7 +142,7 @@
             var id = $(this).attr('data-id');
             $.ajax({
                 method: "DELETE",
-                url: "../api/ThanhVien_API/DeleteThanhVienModel/" + id
+                url: "../../../api/ThanhVien_API/DeleteThanhVienModel/" + id
             })
                 .done(function (reponse) {
                     if (response = !null) {
