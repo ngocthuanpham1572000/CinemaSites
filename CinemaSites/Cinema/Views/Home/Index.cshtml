@@ -18,33 +18,21 @@
             <div class="tab-area mb-30-none">
                 <div class="tab-item active">
                     <div class="owl-carousel owl-theme tab-slider">
-                        @for (int i = 0; i < 9; i++)
+                        @foreach (var item in ViewBag.lstPhimDangChieu)
                         {
                             <div class="item">
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a asp-controller="Movie" asp-action="Movie_Detail">
-                                            <img src="~/template_user/assets/images/movie/movie01.jpg" alt="movie">
+                                        <a asp-controller="Movie" asp-action="Movie_Detail" asp-route-id="@item.Id">
+                                            <img src="~/template_admin/images/Phim/@item.HinhAnh" alt="movie">
                                         </a>
                                     </div>
                                     <div class="movie-content bg-one">
+
                                         <h5 class="title m-0">
-                                            <a asp-controller="Movie" asp-action="Movie_Detail">alone</a>
+                                            <a asp-controller="Movie" asp-action="Movie_Detail" asp-route-id="@item.Id">@item.TenPhim</a>
                                         </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="~/template_user/assets/images/movie/tomato.png" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="~/template_user/assets/images/movie/cake.png" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
@@ -76,33 +64,20 @@
             <div class="tab-area mb-30-none">
                 <div class="tab-item active">
                     <div class="owl-carousel owl-theme tab-slider">
-                        @for (int i = 0; i < 9; i++)
+                        @foreach (var item in ViewBag.lstPhimSapChieu)
                         {
                             <div class="item">
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a asp-controller="Movie" asp-action="Movie_Detail_CommingSoon">
-                                            <img src="~/template_user/assets/images/movie/movie01.jpg" alt="movie">
+                                        <a asp-controller="Movie" asp-action="Movie_Detail" asp-route-id="@item.Id">
+                                            <img src="~/template_admin/images/Phim/@item.HinhAnh" alt="movie">
                                         </a>
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a asp-controller="Movie" asp-action="Movie_Detail_CommingSoon">alone</a>
+                                            <a asp-controller="Movie" asp-action="Movie_Detail_CommingSoon">@item.TenPhim</a>
                                         </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="~/template_user/assets/images/movie/tomato.png" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="~/template_user/assets/images/movie/cake.png" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
+
                                     </div>
                                 </div>
                             </div>

@@ -50,10 +50,6 @@ namespace Cinema.Areas.Admin.Controllers
             return RedirectToAction("Login", "HomePage");
         }
 
-        public IActionResult LoginFacebook()
-        {
-            return View();
-        }
 
         public IActionResult Logout()
         {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cinema.Areas.Admin.Data;
 using Cinema.Areas.Admin.Models;
 using Newtonsoft.Json;
+using Cinema.Areas.API.Models;
 
 namespace Cinema.Areas.API.Controllers
 {
@@ -111,14 +112,45 @@ namespace Cinema.Areas.API.Controllers
         // POST: api/ThanhVien_API
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<ThanhVienModel>> PostThanhVienModel(ThanhVienModel thanhVienModel)
+        [HttpPost("PostThanhVienModel")]
+        public async Task<ActionResult<bool>> PostThanhVienModel(DangKy val)
         {
-            _context.tb_ThanhVien.Add(thanhVienModel);
-            await _context.SaveChangesAsync();
+            ThanhVienModel thanhVien = new ThanhVienModel();
+            thanhVien.Ten = val.name;
+            thanhVien.MatKhau = StringProcessing.CreateMD5Hash(val.password);
+            thanhVien.TaiKhoan = val.username;
+            thanhVien.GioiTinh = val.sex;
+            thanhVien.SDT = val.phone;
+            thanhVien.Email = val.email;
+            thanhVien.TrangThai = true;
+            thanhVien.HinhAnh = "not available";
+            if (!UsernameExists(thanhVien.TaiKhoan))
+            {
+                _context.tb_ThanhVien.Add(thanhVien);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return false;
+            }
 
-            return CreatedAtAction("GetThanhVienModel", new { id = thanhVienModel.Id }, thanhVienModel);
+            var str = JsonConvert.SerializeObject(thanhVien);
+            HttpContext.Session.SetString("user", str);
+
+            if (str != null)
+            {
+                return true;
+            }
+            return false;
+
+
         }
+
+        private bool UsernameExists(string username)
+        {
+            return _context.tb_ThanhVien.Any(e => e.TaiKhoan == username);
+        }
+
 
         // DELETE: api/ThanhVien_API/5
         [HttpDelete("{id}")]

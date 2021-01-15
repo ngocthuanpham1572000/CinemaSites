@@ -1041,3 +1041,9 @@ E:\CinemaSites\CinemaSites\Cinema\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.A
 E:\CinemaSites\CinemaSites\Cinema\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Phong\AddHang.cshtml.g.cs
 >>>>>>> 6ac9676658694af558879458d01fbf78a594c888
 D:\ASP\cinema\CinemaSites\CinemaSites\CinemaSites\Cinema\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Facebook.dll
+D:\ASP\cinema\CinemaSites\CinemaSites\CinemaSites\Cinema\obj\Debug\netcoreapp3.1\Razor\Views\Cinema\Cinema_Map.cshtml.g.cs
+D:\ASP\cinema\CinemaSites\CinemaSites\CinemaSites\Cinema\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Controllers\Ghe\Create.cshtml.g.cs
+D:\ASP\cinema\CinemaSites\CinemaSites\CinemaSites\Cinema\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Controllers\Ghe\Delete.cshtml.g.cs
+D:\ASP\cinema\CinemaSites\CinemaSites\CinemaSites\Cinema\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Controllers\Ghe\Details.cshtml.g.cs
+D:\ASP\cinema\CinemaSites\CinemaSites\CinemaSites\Cinema\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Controllers\Ghe\Edit.cshtml.g.cs
+D:\ASP\cinema\CinemaSites\CinemaSites\CinemaSites\Cinema\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Controllers\Ghe\Index.cshtml.g.cs

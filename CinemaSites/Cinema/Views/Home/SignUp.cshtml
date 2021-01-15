@@ -6,31 +6,33 @@
                     <span class="cate">Đăng ký thành viên</span>
                     <h2 class="title">Boleto Cinema </h2>
                 </div>
-                <form class="account-form">
+                <form class="account-form" id="form-signup" method="post">
                     <div class="form-group">
                         <label for="name">Họ và tên<span>*</span></label>
                         <input type="text" placeholder="Nhập họ và tên" id="name" required>
                     </div>
-                    <div class="form-group">
-                        <label for="birthday">Ngày sinh<span>*</span></label>
-                        <div class="col-12">
-                            <input type="date" value="2020-11-26" id="birthday">
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <label for="sex">Giới tính<span>*</span></label>
-                        <select  id="sex" style=" background-color: #001232">
+                        <select id="sex" style=" background-color: #001232">
                             <option>Nam</option>
                             <option>Nữ</option>
-                          
+
                         </select>
                     </div>
-
-
                     <div class="form-group">
-                        <label for="email1">Email<span>*</span></label>
-                        <input type="text" placeholder="Nhập Email" id="email1" required>
+                        <label for="email">Email<span>*</span></label>
+                        <input type="text" placeholder="Nhập Email" id="email" required>
                     </div>
+                    <div class="form-group">
+                        <label for="phone">Điện thoại<span>*</span></label>
+                        <input type="tel" placeholder="Nhập SĐT" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Tài khoản<span>*</span></label>
+                        <input type="text" placeholder="Nhập tài khoản" id="username" required>
+                    </div>
+
                     <div class="form-group">
                         <label for="pass1">Password<span>*</span></label>
                         <input type="password" placeholder="Nhập Password" id="pass1" required>
@@ -50,8 +52,63 @@
                 <div class="option">
                     Bạn đã có tài khoản? <a asp-controller="Home" asp-action="SignIn">Đăng nhập</a>
                 </div>
-                
+
             </div>
         </div>
     </div>
 </section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+    dangky();
+    function dangky() {
+        $('#form-signup').submit(function (event) {
+            event.preventDefault();
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var sex = $('#sex').val();
+            var password = $('#pass1').val();
+            var password_re = $('#pass2').val();
+            var phone = $('#phone').val();
+            var username = $('#username').val();
+
+            if (password != password_re) {
+                alert("Mật khẩu xác nhận không trùng khớp!");
+            }
+            else {
+                $.ajax({
+                    url: "/api/ThanhVien_API/PostThanhVienModel",
+                    method: "post",
+                    data: JSON.stringify({
+                        "name": name,
+                        "sex": sex,
+                        "email": email,
+                        "password": password,
+                        "phone": phone,
+                        "username": username
+                    }),
+                    dataType: "json",
+                    contentType: "application/json",
+
+                }).done(function (res) {
+                    if (!res) {
+                        alert("Đăng kí thất bại!");
+                    }
+                    else {
+                        alert("Đăng kí thành công!");
+                        window.location.href = "../Home/SignIn";
+                    }
+                })
+            }
+        })
+
+    }
+
+
+
+
+
+    </script>
+}
+

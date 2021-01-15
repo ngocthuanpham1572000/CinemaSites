@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cinema.Areas.Admin.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,25 +10,46 @@ namespace Cinema.Controllers
 {
     public class MovieController : Controller
     {
-        public IActionResult Movie_Detail()
+        private readonly DPContext _context;
+        public MovieController(DPContext context)
         {
-            return View();
+            _context = context;
         }
-        public IActionResult Movie_Detail_CommingSoon()
+        public async Task<IActionResult> Movie_Detail(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var phimModel = await _context.tb_Phim
+                .Include(p => p.Loai)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (phimModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(phimModel);
         }
 
-        public IActionResult MovieList_NowPlaying()
+        public async Task<IActionResult> MovieList_NowPlaying()
         {
-            return View();
+            var dsPhim = await (from a in _context.tb_Phim
+                                where a.TrangThai == 1
+                                select a).ToListAsync();
+
+            return View(dsPhim);
         }
 
 
 
-        public IActionResult MovieList_CoomingSoon()
+        public async Task<IActionResult> MovieList_CommingSoon()
         {
-            return View();
+            var dsPhim = await (from a in _context.tb_Phim
+                                where a.TrangThai == 2
+                                select a).ToListAsync();
+
+            return View(dsPhim);
         }
 
     }

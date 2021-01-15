@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+}
+
+<script src="https://cdn.maptiler.com/ol/v6.0.0/ol.js"></script>
+<script src="https://cdn.maptiler.com/ol-mapbox-style/v5.0.2/olms.js"></script>
+<link rel="stylesheet" href="https://cdn.maptiler.com/ol/v6.0.0/ol.css">
+<style>
+    #map {
+     
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom:0;
+        left: 0;
+   
+</style>
+
+<div id="map"></div><p><a href="https://www.maptiler.com/copyright/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a></p>
+
+<script>
+    var styleJson = 'https://api.maptiler.com/maps/streets/style.json?key=0SRSuy4sVN7fO0RiEu2t';
+    var map = new ol.Map({
+        target: 'map',
+        view: new ol.View({
+            constrainResolution: true,
+            center: ol.proj.fromLonLat([0, 0]),
+            zoom: 2
+        })
+    });
+    olms.apply(map, styleJson);
+</script>
+

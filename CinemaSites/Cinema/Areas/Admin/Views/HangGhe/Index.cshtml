@@ -74,7 +74,7 @@
                 var id = $(this).attr('data-id');
                 $.ajax({
                     method: "DELETE",
-                    url: "../../../API/HangGhe_API/DeleteHangGheModel/" + id
+                    url: "../../API/HangGhe_API/DeleteHangGheModel/" + id
                 })
                     .done(function (msg) {
                         alert("Đã thay đổi trạng thái hàng " + msg.tenHang);

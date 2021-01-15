@@ -1,12 +1,17 @@
 ﻿@model Cinema.Areas.Admin.Models.GheModel
 
 
+<h1>Index</h1>
 @{
     if (ViewContext.RouteData.Values["id"] != null)
     {
         <p><a asp-action="Index" asp-route-id="">Create New</a></p>
     }
 }
+<hr />
+
+
+<hr />
 <partial name="Create" />
 <hr />
 <form class="container" action="Index" method="get">
@@ -71,7 +76,7 @@
             var id = $(this).attr('data-id');
             $.ajax({
                 method: "DELETE",
-                url: "../../../API/Ghe_API/DeleteGheModel/" + id
+                url: "../../API/Ghe_API/DeleteGheModel/" + id
             })
                 .done(function (msg) {
                     alert("Đã thay đổi trạng thái ghế " + msg.tenGhe);

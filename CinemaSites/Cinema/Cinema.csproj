@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Ghe\Create.cshtml" />
+    <None Include="Areas\Admin\Views\Ghe\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\Ghe\Details.cshtml" />
+    <None Include="Areas\Admin\Views\Ghe\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\Ghe\Index.cshtml" />
+    <None Include="Areas\Admin\Views\HangGhe\Create.cshtml" />
+    <None Include="Areas\Admin\Views\HangGhe\Delete.cshtml" />
+    <None Include="Areas\Admin\Views\HangGhe\Details.cshtml" />
+    <None Include="Areas\Admin\Views\HangGhe\Edit.cshtml" />
+    <None Include="Areas\Admin\Views\HangGhe\Index.cshtml" />
     <None Include="wwwroot\template_admin\css\maps\style.css.map" />
     <None Include="wwwroot\template_admin\fonts\.DS_Store" />
     <None Include="wwwroot\template_admin\fonts\Roboto\.DS_Store" />
@@ -96,7 +106,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\API\Data\" />
-    <Folder Include="Areas\API\Models\" />
     <Folder Include="Areas\API\Views\" />
     <Folder Include="wwwroot\img\pic_cinema\" />
     <Folder Include="wwwroot\template_admin\images\rapphim\" />

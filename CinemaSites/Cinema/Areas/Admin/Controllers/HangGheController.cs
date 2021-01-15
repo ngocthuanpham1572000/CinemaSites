@@ -25,7 +25,7 @@ namespace Cinema.Areas.Admin.Controllers
         {
             if (Request.QueryString.Value.IndexOf("TenPhong") < 0)
             {
-                ViewBag.ListHangGhe = _context.tb_HangGhe.Where(m => m.TrangThai == true).ToList();
+                ViewBag.ListHangGhe = _context.tb_HangGhe.ToList();
             }
 
             base.OnActionExecuted(context);

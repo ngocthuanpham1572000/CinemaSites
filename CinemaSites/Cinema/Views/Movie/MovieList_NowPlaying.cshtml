@@ -1,13 +1,14 @@
-﻿<section class="movie-section padding-top padding-bottom">
+﻿@model IEnumerable<Cinema.Areas.Admin.Models.PhimModel>
+<section class="movie-section padding-top padding-bottom">
     <div class="container">
         <div class="row flex-wrap-reverse justify-content-center">
-           
+
             <div class="col-lg-9 mb-50 mb-lg-0">
                 <div class="filter-tab tab">
                     <div class="filter-area">
                         <div class="filter-main">
                             <div class="left">
-                                
+
                                 <div class="item">
                                     <span>Chế độ xem</span>
                                 </div>
@@ -25,33 +26,20 @@
                     <div class="tab-area">
                         <div class="tab-item">
                             <div class="row mb-10 justify-content-center">
-                                @for (int i = 0; i < 9; i++)
+                                @foreach (var item in Model)
                                 {
                                     <div class="col-sm-6 col-lg-4">
                                         <div class="movie-grid">
                                             <div class="movie-thumb c-thumb">
-                                                <a asp-controller="Movie" asp-action="Movie_Detail">
-                                                    <img src="~/template_user/assets/images/movie/movie01.jpg" alt="movie">
+                                                <a asp-controller="Movie" asp-action="Movie_Detail" asp-route-id="@item.Id">
+                                                    <img src="~/template_admin/images/Phim/@Html.DisplayFor(modelItem => item.HinhAnh)" alt="movie">
                                                 </a>
                                             </div>
                                             <div class="movie-content bg-one">
                                                 <h5 class="title m-0">
-                                                    <a asp-controller="Movie" asp-action="Movie_Detail">alone</a>
+                                                    <a asp-controller="Movie" asp-action="Movie_Detail" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.TenPhim)</a>
                                                 </h5>
-                                                <ul class="movie-rating-percent">
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="~/template_user/assets/images/movie/tomato.png" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                    <li>
-                                                        <div class="thumb">
-                                                            <img src="~/template_user/assets/images/movie/cake.png" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </li>
-                                                </ul>
+
                                             </div>
                                         </div>
                                     </div>
@@ -61,41 +49,26 @@
                         </div>
                         <div class="tab-item active">
                             <div class="movie-area mb-10">
-                                @for (int i = 0; i < 9; i++)
+                                @foreach (var item in Model)
                                 {
                                     <div class="movie-list">
                                         <div class="movie-thumb c-thumb">
-                                            <a href="movie-details.html" class="w-100 bg_img h-100" data-background="../template_user/assets/images/movie/movie01.jpg">
-                                                <img class="d-sm-none" src="~/template_user/assets/images/movie/movie01.jpg" alt="movie">
+                                            <a asp-controller="Movie" asp-action="Movie_Detail" asp-route-id="@item.Id">
+                                                <img src="~/template_admin/images/Phim/@Html.DisplayFor(modelItem => item.HinhAnh)" alt="movie">
                                             </a>
                                         </div>
                                         <div class="movie-content bg-one">
                                             <h5 class="title">
-                                                <a asp-controller="Movie" asp-action="Movie_Detail">alone</a>
+                                                <a asp-controller="Movie" asp-action="Movie_Detail" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.TenPhim)</a>
                                             </h5>
-                                            <p class="duration">2hrs 50 min</p>
+                                            <p class="duration">@Html.DisplayFor(modelItem => item.ThoiLuong) phút</p>
                                             <div class="movie-tags">
-                                                <a href="#0">action</a>
-                                                <a href="#0">adventure</a>
-                                                <a href="#0">fantasy</a>
+                                                <a href="#0">@Html.DisplayFor(modelItem => item.Loai.TenLoai)</a>
                                             </div>
                                             <div class="release">
-                                                <span>Ngày khởi chiếu : </span> <a href="#0"> November 8 , 2020</a>
+                                                <span>Ngày khởi chiếu : </span> <a href="#0">@Html.DisplayFor(modelItem => item.NgayPhatHanh)"</a>
                                             </div>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="~/template_user/assets/images/movie/tomato.png" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div class="thumb">
-                                                        <img src="~/template_user/assets/images/movie/cake.png" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </li>
-                                            </ul>
+
                                             <div class="book-area">
                                                 <div class="book-ticket">
                                                     <div class="react-item">
@@ -114,11 +87,11 @@
                                                         </a>
                                                     </div>
                                                     <div class="react-item">
-                                                        <a href="#0" class="popup-video">
+                                                        <a href="@Html.DisplayFor(modelItem => item.Trailer)" class="popup-video">
                                                             <div class="thumb">
                                                                 <img src="~/template_user/assets/images/icons/play-button.png" alt="icons">
                                                             </div>
-                                                            <span>Xem trailer</span>
+                                                            <span >Xem trailer</span>
                                                         </a>
                                                     </div>
                                                 </div>

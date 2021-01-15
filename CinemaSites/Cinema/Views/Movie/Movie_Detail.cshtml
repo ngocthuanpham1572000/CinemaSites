@@ -1,23 +1,25 @@
-﻿<section class="details-banner bg_img" >
+﻿@model Cinema.Areas.Admin.Models.PhimModel
+<section class="details-banner bg_img">
     <div class="container">
         <div class="details-banner-wrapper">
             <div class="details-banner-thumb">
-                <img src="~/template_user/assets/images/movie/venus.jpg" alt="movie">
-                <a href="https://www.youtube.com/embed/KGeBMAgc46E" class="video-popup">
+                <img src="~/template_admin/images/Phim/@Html.DisplayFor(model => model.HinhAnh)" alt="movie">
+                <a href="@Html.DisplayFor(model => model.Trailer)" class="video-popup">
                     <img src="~/template_user/assets/images/movie/video-button.png" alt="movie">
                 </a>
             </div>
             <div class="details-banner-content offset-lg-3">
-                <h3 class="title">Venus</h3>
-                
-                <a href="#0" class="button">horror</a>
+                <h3 class="title">@Html.DisplayFor(model => model.TenPhim)</h3>
+
+
+                <a href="#0" class="button"> @Html.DisplayFor(model => model.Loai.TenLoai)</a>
                 <div class="social-and-duration">
                     <div class="duration-area">
                         <div class="item">
-                            <i class="fas fa-calendar-alt"></i><span>06 Dec, 2020</span>
+                            <i class="fas fa-calendar-alt"></i><span>@Html.DisplayFor(model => model.NgayPhatHanh)</span>
                         </div>
                         <div class="item">
-                            <i class="far fa-clock"></i><span>2 hrs 50 mins</span>
+                            <i class="far fa-clock"></i><span>@Html.DisplayFor(model => model.ThoiLuong) phút</span>
                         </div>
                     </div>
                     <ul class="social-share">
@@ -39,56 +41,36 @@
     <div class="container">
         <div class="book-wrapper offset-lg-3">
             <div class="left-side">
-                <div class="item">
-                    <div class="item-header">
-                        <div class="thumb">
-                            <img src="~/template_user/assets/images/movie/tomato2.png" alt="movie">
-                        </div>
-                        <div class="counter-area">
-                            <span class="counter-item odometer" data-odometer-final="88">0</span>
-                        </div>
-                    </div>
-                    <p>tomatometer</p>
+                <div class="">
+
+                    <p>Đạo diễn:  @Html.DisplayFor(model => model.DaoDien) </p>
+                    <br />
+                    <p>Diễn viên:  @Html.DisplayFor(model => model.DienVien)</p>
+                    <br />
+                    <p>Quốc gia: @Html.DisplayFor(model => model.QuocGia)</p>
+                    <br />
+
                 </div>
-                <div class="item">
-                    <div class="item-header">
-                        <div class="thumb">
-                            <img src="~/template_user/assets/images/movie/cake2.png" alt="movie">
-                        </div>
-                        <div class="counter-area">
-                            <span class="counter-item odometer" data-odometer-final="88">0</span>
-                        </div>
-                    </div>
-                    <p>audience Score</p>
-                </div>
-                <div class="item">
-                    <div class="item-header">
-                        <h5 class="title">4.5</h5>
-                        <div class="rated">
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                        </div>
-                    </div>
-                    <p>Users Rating</p>
-                </div>
-                <div class="item">
-                    <div class="item-header">
-                        <div class="rated rate-it">
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <h5 class="title">0.0</h5>
-                    </div>
-                    <p><a href="#0">Rate It</a></p>
-                </div>
+
+
+
             </div>
-            <a asp-controller="Ticket" asp-action="BookStep_1" class="custom-button">Đặt vé</a>
+
+            <a asp-controller="@(Model.TrangThai==1?"Ticket":"")" asp-action="@(Model.TrangThai==1?"BookStep_1":"")" class="custom-button">
+
+                @{
+                    if (Model.TrangThai == 1)
+                    {
+                        @:Đặt vé
+                    }
+                    else
+                    {
+                        @:Sắp công chiếu
+                    }
+
+
+                }
+            </a>
         </div>
     </div>
 </section>
@@ -111,65 +93,30 @@
                         </li>
                     </ul>
                 </div>
-             
+
             </div>
             <div class="col-lg-9 mb-50">
                 <div class="movie-details">
-                    <h3 class="title">photos</h3>
-                    <div class="details-photos owl-carousel">
-                        <div class="thumb">
-                            <a href="~/template_user/assets/images/movie/movie-details01.jpg" class="img-pop">
-                                <img src="~/template_user/assets/images/movie/movie-details01.jpg" alt="movie">
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="~/template_user/assets/images/movie/movie-details02.jpg" class="img-pop">
-                                <img src="~/template_user/assets/images/movie/movie-details02.jpg" alt="movie">
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="~/template_user/assets/images/movie/movie-details03.jpg" class="img-pop">
-                                <img src="~/template_user/assets/images/movie/movie-details03.jpg" alt="movie">
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="~/template_user/assets/images/movie/movie-details01.jpg" class="img-pop">
-                                <img src="~/template_user/assets/images/movie/movie-details01.jpg" alt="movie">
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="~/template_user/assets/images/movie/movie-details02.jpg" class="img-pop">
-                                <img src="~/template_user/assets/images/movie/movie-details02.jpg" alt="movie">
-                            </a>
-                        </div>
-                        <div class="thumb">
-                            <a href="~/template_user/assets/images/movie/movie-details03.jpg" class="img-pop">
-                                <img src="~/template_user/assets/images/movie/movie-details03.jpg" alt="movie">
-                            </a>
-                        </div>
-                    </div>
+
                     <div class="tab summery-review">
                         <ul class="tab-menu">
                             <li class="active">
                                 Tóm tắt
                             </li>
-                           
+
                         </ul>
                         <div class="tab-area">
                             <div class="tab-item active">
                                 <div class="item">
                                     <h5 class="sub-title"> Nội dung phim</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula eros sit amet est tincidunt aliquet. Fusce laoreet ligula ac ultrices eleifend. Donec hendrerit fringilla odio, ut feugiat mi convallis nec. Fusce elit ex, blandit vitae mattis sit amet, iaculis ac elit. Ut diam mauris, viverra sit amet dictum vel, aliquam ac quam. Ut mi nisl, fringilla sit amet erat et, convallis porttitor ligula. Sed auctor, orci id luctus venenatis, dui dolor euismod risus, et pharetra orci lectus quis sapien. Duis blandit ipsum ac consectetur scelerisque. </p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula eros sit amet est tincidunt aliquet. Fusce laoreet ligula ac ultrices eleifend. Donec hendrerit fringilla odio, ut feugiat mi convallis nec. Fusce elit ex, blandit vitae mattis sit amet, iaculis ac elit. Ut diam mauris, viverra sit amet dictum vel, aliquam ac quam. Ut mi nisl, fringilla sit amet erat et, convallis porttitor ligula. Sed auctor, orci id luctus venenatis, dui dolor euismod risus, et pharetra orci lectus quis sapien. Duis blandit ipsum ac consectetur scelerisque. </p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula eros sit amet est tincidunt aliquet. Fusce laoreet ligula ac ultrices eleifend. Donec hendrerit fringilla odio, ut feugiat mi convallis nec. Fusce elit ex, blandit vitae mattis sit amet, iaculis ac elit. Ut diam mauris, viverra sit amet dictum vel, aliquam ac quam. Ut mi nisl, fringilla sit amet erat et, convallis porttitor ligula. Sed auctor, orci id luctus venenatis, dui dolor euismod risus, et pharetra orci lectus quis sapien. Duis blandit ipsum ac consectetur scelerisque. </p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula eros sit amet est tincidunt aliquet. Fusce laoreet ligula ac ultrices eleifend. Donec hendrerit fringilla odio, ut feugiat mi convallis nec. Fusce elit ex, blandit vitae mattis sit amet, iaculis ac elit. Ut diam mauris, viverra sit amet dictum vel, aliquam ac quam. Ut mi nisl, fringilla sit amet erat et, convallis porttitor ligula. Sed auctor, orci id luctus venenatis, dui dolor euismod risus, et pharetra orci lectus quis sapien. Duis blandit ipsum ac consectetur scelerisque. </p>
+                                    <p>@Html.DisplayFor(model => model.Mota)</p>
 
                                 </div>
-                                
-                                
-                               
+
+
+
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
